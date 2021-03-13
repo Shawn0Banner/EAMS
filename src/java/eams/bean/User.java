@@ -15,7 +15,7 @@ public class User {
     private String password;
     private String department;
     private String type;
-private String name;
+
 
     /**
      * @return the userId
