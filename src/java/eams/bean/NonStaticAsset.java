@@ -10,8 +10,8 @@ package eams.bean;
  * @author Windows10
  */
 public class NonStaticAsset {
-    
-     private int modelNo;
+
+    private int modelNo;
     private String type;
     private String department;
     private String status;
