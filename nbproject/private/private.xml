@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/NetBeans%20Project/IMS/src/java/eams/bean/User.java</file>
-            <file>file:/E:/NetBeans%20Project/IMS/src/java/eams/bean/StaticAsset.java</file>
-            <file>file:/E:/NetBeans%20Project/IMS/src/java/eams/bean/NonStaticAsset.java</file>
-            <file>file:/E:/NetBeans%20Project/IMS/src/java/eams/bean/RepairLog.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/css/bootstrap-grid.min.css</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/homePage.jsp</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/css/bootstrap-grid.rtl.css</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/css/bootstrap.css</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/css/bootstrap-grid.css</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/welcomeStruts.jsp</file>
         </group>
     </open-files>
 </project-private>
