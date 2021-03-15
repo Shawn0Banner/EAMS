@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/css/bootstrap-grid.min.css</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/homePage.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/css/bootstrap-grid.rtl.css</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/css/bootstrap.css</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/css/bootstrap-grid.css</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/welcomeStruts.jsp</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/servlet/Register.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/servlet/Login.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/Register.jsp</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/utilities/ConnectionProviderToDB.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/config/db_params.properties</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/index.jsp</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/AdminHome.jsp</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/Login.jsp</file>
         </group>
     </open-files>
 </project-private>

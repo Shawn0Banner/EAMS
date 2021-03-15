@@ -3,44 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exavalu.utilities;
+package eams.utilities;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
  *
- * @author Windows10
+ * @author Abhradeep
  */
 public class PropertiesReader {
-    
-    
-     public static DbParamProvider readProperties(String filepath)  {
-        DbParamProvider dbParamProvider = new DbParamProvider();
-        //Now read the property file and extarct the properties to set into DbParamProvider class
-        FileReader reader;
+
+    public static DbParamProvider readProperties(String propertiesAddress) {
+        DbParamProvider dp = new DbParamProvider();
+        //read the properties files and extract the properties to set into DbParamProvider class
         try {
-            reader = new FileReader(filepath);
+            FileReader reader = new FileReader(propertiesAddress);
             Properties p = new Properties();
             p.load(reader);
-            dbParamProvider.setDriver(p.getProperty("driver"));
-            dbParamProvider.setDbUrl(p.getProperty("db_url"));
-            dbParamProvider.setDbName(p.getProperty("db_name"));
-            dbParamProvider.setUserName(p.getProperty("user_name"));
-            dbParamProvider.setPassword(p.getProperty("password"));
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
-        }
-        catch(IOException ex)
-        {
-            System.out.println(ex.getMessage());
-        }
 
-        return dbParamProvider;
+            dp.setDriver(p.getProperty("driver"));
+            dp.setDbUrl(p.getProperty("db_url"));
+            dp.setDbName(p.getProperty("db_name"));
+            dp.setUserName(p.getProperty("user_name"));
+            dp.setPassword(p.getProperty("password"));
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return dp;
     }
 
 }
-
-

@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exavalu.utilities;
+package eams.utilities;
 
 /**
  *
- * @author Windows10
+ * @author Abhradeep
  */
 public class DbParamProvider {
-    
-     private String driver;
+    private String driver;
     private String dbUrl;
     private String dbName;
     private String userName;
@@ -86,6 +85,5 @@ public class DbParamProvider {
     public void setPassword(String password) {
         this.password = password;
     }
-
     
 }

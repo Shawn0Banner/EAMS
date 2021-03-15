@@ -5,12 +5,18 @@
  */
 package eams.servlet;
 
+import eams.utilities.ConnectionProviderToDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,16 +37,38 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+            String userName = request.getParameter("userName");
+            String password = request.getParameter("password");
+            
+            System.out.println(userName);
+            System.out.println(password);
+
+            Connection con = null;
+            try {
+                con = ConnectionProviderToDB.getConnectionObject().getConnection("D:\\Documents\\NetBeansProjects\\EAMS\\config\\db_params.properties");
+                PreparedStatement ps = con.prepareStatement("select * from user where userId=? and password=?");
+                ps.setString(1, userName);
+                ps.setString(2, password);
+
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    //user present
+                    System.out.println("Login Successful...........");
+                    RequestDispatcher rd = request.getRequestDispatcher("AdminHome.jsp");
+                    HttpSession session = request.getSession();
+                    rd.forward(request, response);
+                } else {
+                    //failed validation
+                    System.out.println("Login Not Successful...........");
+                    RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                    rd.forward(request, response);
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 

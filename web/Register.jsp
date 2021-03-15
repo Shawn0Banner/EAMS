@@ -1,115 +1,181 @@
-
-<!doctype html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-        <meta name="generator" content="Hugo 0.80.0">
-        <title>Signin Template · Bootstrap v5.0</title>
-
-        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
-
-
-
-        <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Favicons -->
-        <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-        <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-        <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-        <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
-        <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-        <link rel="icon" href="icons/eam-icon.png">
-        <meta name="theme-color" content="#7952b3">
-
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <style>
-            .bd-placeholder-img {
-                font-size: 1.125rem;
-                text-anchor: middle;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                user-select: none;
+            .register{
+                background: -webkit-linear-gradient(left, #cc0000,grey);
+                margin-top: 3%;
+                padding: 3%;
             }
-
-            @media (min-width: 768px) {
-                .bd-placeholder-img-lg {
-                    font-size: 3.5rem;
-                }
+            .register-left{
+                text-align: center;
+                color: #fff;
+                margin-top: 4%;
             }
-        </style>
-
-
-        <!-- Custom styles for this template -->
-        <link href="css/signin.css" rel="stylesheet">
-    </head> 
-    <script>
-        function verifyPassword() {
-            var pw = document.getElementById("form3Example5").value;
-            var user = document.getElementById("form3Example3").value;
-            var dept = document.getElementById("form3Example4").value;
-
-            if (user == "") {
-                document.getElementById("message1").innerHTML = "Enter User Name";
+            .register-left input{
+                border: none;
+                border-radius: 1.5rem;
+                padding: 2%;
+                width: 60%;
+                background: #f8f9fa;
+                font-weight: bold;
+                color: #383d41;
+                margin-top: 30%;
+                margin-bottom: 3%;
+                cursor: pointer;
             }
-
-            if (dept == "") {
-                document.getElementById("message2").innerHTML = "Enter Department Name";
+            .register-right{
+                background: #f8f9fa;
+                border-top-left-radius: 10% 50%;
+                border-bottom-left-radius: 10% 50%;
             }
+            .register-left img{
+                margin-top: 15%;
+                margin-bottom: 5%;
+                width: 25%;
+                -webkit-animation: mover 2s infinite  alternate;
+                animation: mover 1s infinite  alternate;
+            }
+            @-webkit-keyframes mover {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(-20px); }
+            }
+            @keyframes mover {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(-20px); }
+            }
+            .register-left p{
+                font-weight: lighter;
+                padding: 12%;
+                margin-top: -9%;
+            }
+            .register .register-form{
+                padding: 10%;
+                margin-top: 10%;
+            }
+            .btnRegister{
+                float: right;
+                margin-top: 10%;
+                border: none;
+                border-radius: 1.5rem;
+                padding: 2%;
+                background: #cc0000;
+                color: #fff;
+                font-weight: 600;
+                width: 50%;
+                cursor: pointer;
+            }
+            .register .nav-tabs{
+                margin-top: 3%;
+                border: none;
+                background: #0062cc;
+                border-radius: 1.5rem;
+                width: 28%;
+                float: right;
+            }
+            .register .nav-tabs .nav-link{
+                padding: 2%;
+                height: 34px;
+                font-weight: 600;
+                color: #fff;
+                border-top-right-radius: 1.5rem;
+                border-bottom-right-radius: 1.5rem;
+            }
+            .register .nav-tabs .nav-link:hover{
+                border: none;
+            }
+            .register .nav-tabs .nav-link.active{
+                width: 100px;
+                color: #0062cc;
+                border: 2px solid #0062cc;
+                border-top-left-radius: 1.5rem;
+                border-bottom-left-radius: 1.5rem;
+            }
+            .register-heading{
+                text-align: center;
+                margin-top: 8%;
+                margin-bottom: -15%;
+                color: #495057;
+            }</style></head><body>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="https://www.exavalu.com/wp-content/uploads/2019/05/exavaluLogo.png" alt="" width="200" height="50" class="d-inline-block align-mid">
+                    ASSET MANAGEMENT
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#about" style ="color: white">Home</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
 
-            //check empty password field  
-            if (pw == "") {
-                document.getElementById("message").innerHTML = "Enter password";
-                return false;
-            }
+        <div class="container register">
+            <div class="row">
+                <div class="col-md-3 register-left">
+                    <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="">
+                    <h3>Welcome</h3>
+                    <p>Register now to get started!</p>
 
-            //minimum password length validation  
-            if (pw.length < 6) {
-                document.getElementById("message").innerHTML = "Password must be 6 characters";
-                return false;
-            }
-            else {
-                alert("Password is correct");
-            }
-        }
-    </script> 
-    <body class="text-center">
-        <div class="container">
-            <main class="form-signin">
-                <form onsubmit="return verifyPassword()">
-                    <img class="mb-4" src="icons/eams-icon.png" alt="" width="200" height="57">
-                    <h1 class="h3 mb-3 fw-normal">Register Here</h1>
-                    <!-- Email input -->
-                    <div class="form-outline mb-4">
-                        <input type="text" id="form3Example3" class="form-control" placeholder="User Name" />
-                        <span id = "message1" class="bg-danger rounded-2"> </span>
+                </div>
+                <div class="col-md-9 register-right">
+
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <h3 class="register-heading">Registration Form</h3>
+                            <div class="row register-form">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" placeholder="Your Email *" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="form-control">
+                                            <option class="hidden" selected="" disabled="">Please select your department</option>
+                                            <option>HR</option>
+                                            <option>Testing</option>
+                                            <option>Developer</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="Password *" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="Confirm Password *" value="">
+                                    </div>
+
+
+                                    <input type="submit" class="btnRegister" value="Register">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+                </div>
+            </div>
 
-                    <div class="form-outline mb-4">
-                        <input type="text" id="form3Example4" class="form-control" placeholder="Department" />    
-                        <span id = "message2" class="bg-danger rounded-2"> </span>
-                    </div>
+        </div>   <br><br>
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
+            </div>
+            <!-- /.container -->
+        </footer>
 
-
-                    <!-- Password input -->
-                    <div class="form-outline mb-4">
-                        <input type="password" id="form3Example5" class="form-control" placeholder="Password"/>
-                        <span id = "message" class="bg-danger rounded-2"> </span>
-                    </div>
-
-                    <div class="form-outline mb-4">
-                        <input type="password" id="form3Example6" class="form-control" placeholder="Re-Type Password"/>
-                    </div>
-                    <!-- Submit button -->
-                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
-                </form>
-
-            </main>
-        </div>
-
+        <script type="text/javascript"></script>
     </body>
+
 </html>

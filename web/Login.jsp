@@ -1,71 +1,157 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
     <head>
+
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
-        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-        <meta name="generator" content="Hugo 0.80.0">
-        <title>Signin Template · Bootstrap v5.0</title>
+        <meta name="author" content="">
 
-        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
-
-
+        <title>Scrolling Nav - Start Bootstrap Template</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Favicons -->
-        <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-        <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-        <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-        <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
-        <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-        <link rel="icon" href="icons/eam-icon.png">
-        <meta name="theme-color" content="#7952b3">
-
-
+        <!-- Custom styles for this template -->
         <style>
-            .bd-placeholder-img {
-                font-size: 1.125rem;
-                text-anchor: middle;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                user-select: none;
+            .login-container{
+                margin-top: 5%;
+                margin-bottom: 5%;
             }
-
-            @media (min-width: 768px) {
-                .bd-placeholder-img-lg {
-                    font-size: 3.5rem;
-                }
+            .login-logo{
+                position: relative;
+                margin-left: -41.5%;
+            }
+            .login-logo img{
+                position: absolute;
+                width: 20%;
+                margin-top: 19%;
+                background: #282726;
+                border-radius: 4.5rem;
+                padding: 5%;
+            }
+            .login-form-1{
+                padding: 9%;
+                background:#cc0000;
+                box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+            }
+            .login-form-1 h3{
+                text-align: center;
+                margin-bottom:12%;
+                color:#fff;
+            }
+            .login-form-2{
+                padding: 9%;
+                background: grey;
+                box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+            }
+            .login-form-2 h3{
+                text-align: center;
+                margin-bottom:12%;
+                color: #fff;
+            }
+            .btnSubmit{
+                font-weight: 600;
+                width: 50%;
+                color: #282726;
+                background-color: #fff;
+                border: none;
+                border-radius: 1.5rem;
+                padding:2%;
+            }
+            .btnForgetPwd{
+                color: #fff;
+                font-weight: 600;
+                text-decoration: none;
+            }
+            .btnForgetPwd:hover{
+                text-decoration:none;
+                color:#fff;
             }
         </style>
 
-
-        <!-- Custom styles for this template -->
-        <link href="css/signin.css" rel="stylesheet">
     </head>
-    <body class="text-center">
 
-        <main class="form-signin">
-            <form>
-                <img class="mb-4" src="icons/eams-icon.png" alt="" width="200" height="57">
-                <h1 class="h3 mb-3 fw-normal">Sign in</h1>
-                <label for="inputEmail" class="visually-hidden">User name</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="User Name" required autofocus>
-                <label for="inputPassword" class="visually-hidden">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
+    <body id="page-top">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="https://www.exavalu.com/wp-content/uploads/2019/05/exavaluLogo.png" alt="" width="200" height="50" class="d-inline-block align-mid">
+                    ASSET MANAGEMENT
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#about"style ="color: white">Home</a>
+                        </li>
+
+                    </ul>
                 </div>
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-                <br></br>
-                <button class="w-100 btn btn-lg btn-primary" type="submit" onclick="location.href='Register.jsp'">Register</button>
-            </form>
-        </main>
-        
+            </div>
+        </nav>
+
+        <br>
+        <br>
+        <br>
+        <div class="container login-container">
+            <div class="row">
+                <div class="col-md-6 login-form-1">
+                    <h3>Admin Login</h3>
+                    <form method="post" action="Login">
+                        <div class="form-group">
+                            <input type="text" name="userName" class="form-control" placeholder="Enter USER ID" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" placeholder="Enter Password" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Login" />
+                        </div>
+                        <!-- <div class="form-group">
+                            <a href="#" class="btnForgetPwd">Forget Password?</a>
+                        </div> -->
+                    </form>
+                </div>
+                <div class="col-md-6 login-form-2">
+                    <div class="login-logo">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                    </div>
+                    <h3>User Login</h3>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Email *" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Your Password *" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btnSubmit" value="Login" />
+                    </div>
+                    <!-- <div class="form-group">
+
+                        <a href="#" class="btnForgetPwd" value="Login">Forget Password?</a>
+                    </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
+            </div>
+            <!-- /.container -->
+        </footer>
+
+        <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
     </body>
+
 </html>
