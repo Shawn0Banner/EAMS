@@ -9,6 +9,13 @@ import eams.bean.User;
 import eams.utilities.ConnectionProviderToDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,14 +39,53 @@ public class Register extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        Connection conn = null;
+        
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            User newUser = new User();
-            newUser.setUserName(request.getParameter("userName"));
-            newUser.setPassword(request.getParameter("password"));
-            newUser.setDepartment(request.getParameter("Department"));
-            newUser.setType("USER");
+           User newUser = new User();
+           
+           newUser.setUserName(request.getParameter("email"));
+           newUser.setDepartment(request.getParameter("department"));
+           newUser.setPassword(request.getParameter("password1"));
+           newUser.setType("USER");         
+            //our system will treat every new user register as a user type and not admin type
+           //our system only has one admin only
+           
+           System.out.println(newUser.getUserName());
+           System.out.println(newUser.getPassword());
+           System.out.println(newUser.getDepartment());
+           
+           
+           conn = ConnectionProviderToDB.getConnectionObject().getConnection("D:\\Documents\\NetBeansProjects\\EAMS\\config\\db_params.properties");
+           
+           PreparedStatement ps = conn.prepareCall("insert into user(email, password, department, type) values (?,?,?,?)");
+           ps.setString(1, newUser.getUserName());
+           ps.setString(2, newUser.getPassword());
+           ps.setString(3, newUser.getDepartment());
+           ps.setString(4, newUser.getType());
+                  
+           int r = ps.executeUpdate();
+           
+           if(r > 0){
+               System.out.println("New user created SUCCESSFULLY");
+               
+               RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+               rd.forward(request, response);
+           }
+           else
+               System.out.println("New user creation FAILED");           
+           
+        } catch( Exception e ){
+            System.out.println(e);
+        } finally{
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
         }
+           
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

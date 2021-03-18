@@ -9,13 +9,14 @@ package eams.bean;
  *
  * @author Windows10
  */
-public class NonStaticAsset {
+public class PersonalAsset {
 
     private int modelNo;
     private String type;
     private String department;
-    private String status;
+    private String status;      //status can either be ACTICE or INACTIVE or REPAIRING
     private double value;
+    private int userId;
 
     /**
      * @return the modelNo
@@ -85,5 +86,19 @@ public class NonStaticAsset {
      */
     public void setValue(double value) {
         this.value = value;
+    }
+
+    /**
+     * @return the userId
+     */
+    public int getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

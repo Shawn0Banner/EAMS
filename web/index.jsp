@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="https://www.exavalu.com/wp-content/uploads/2019/05/exavaluLogo.png" alt="" width="200" height="50" class="d-inline-block align-mid">
+                    <img src="https://www.exavalu.com/wp-content/uploads/2019/05/exavaluLogo.png" alt="" width="150" height="50" class="d-inline-block align-mid">
                     ASSET MANAGEMENT
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

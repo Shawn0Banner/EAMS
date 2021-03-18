@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,12 +76,17 @@
     </head>
 
     <body id="page-top">
-
+        
+        <%
+            String error = (String) request.getAttribute("error");
+            System.out.println(error);
+        %>
+        
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="https://www.exavalu.com/wp-content/uploads/2019/05/exavaluLogo.png" alt="" width="200" height="50" class="d-inline-block align-mid">
+                    <img src="https://www.exavalu.com/wp-content/uploads/2019/05/exavaluLogo.png" alt="" width="150" height="50" class="d-inline-block align-mid">
                     ASSET MANAGEMENT
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,8 +94,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item" id="errorMessage"></li>
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#about"style ="color: white">Home</a>
+                            <a class="nav-link js-scroll-trigger" href="index.jsp" style ="color: white">Home</a>
                         </li>
 
                     </ul>
@@ -99,13 +107,14 @@
         <br>
         <br>
         <br>
+        <!-- admin login section -->
         <div class="container login-container">
             <div class="row">
                 <div class="col-md-6 login-form-1">
                     <h3>Admin Login</h3>
                     <form method="post" action="Login">
                         <div class="form-group">
-                            <input type="text" name="userName" class="form-control" placeholder="Enter USER ID" value="" />
+                            <input type="text" id="adminemail" name="email" class="form-control" placeholder="Enter Email" value="" />
                         </div>
                         <div class="form-group">
                             <input type="password" name="password" class="form-control" placeholder="Enter Password" value="" />
@@ -117,25 +126,33 @@
                             <a href="#" class="btnForgetPwd">Forget Password?</a>
                         </div> -->
                     </form>
+
+                    <script>
+                        if (errorMessage === "fail")
+                            document.getElementById("adminemail").placeholder = "wrong";
+                    </script>
                 </div>
+
+                <!-- user login section-->
                 <div class="col-md-6 login-form-2">
                     <div class="login-logo">
                         <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
                     </div>
                     <h3>User Login</h3>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Email *" value="" />
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Your Password *" value="" />
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btnSubmit" value="Login" />
-                    </div>
-                    <!-- <div class="form-group">
-
-                        <a href="#" class="btnForgetPwd" value="Login">Forget Password?</a>
-                    </div> -->
+                    <form method="POST" action="UserLogin">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="email" placeholder="Enter Email" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" placeholder="Enter Password" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Login" />
+                        </div>
+                        <!-- <div class="form-group">
+    
+                            <a href="#" class="btnForgetPwd" value="Login">Forget Password?</a>
+                        </div> -->
                     </form>
                 </div>
             </div>
@@ -147,11 +164,11 @@
                 <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
             </div>
             <!-- /.container -->
-        </footer>
+        </footer>       
+
 
         <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-
     </body>
 
 </html>

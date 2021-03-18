@@ -12,6 +12,9 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +24,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Windows10
+ * @author Abhradeep
  */
-public class Login extends HttpServlet {
+public class UserLogin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,43 +40,43 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        Connection conn = null;
+
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
         try (PrintWriter out = response.getWriter()) {
+            conn = ConnectionProviderToDB.getConnectionObject().getConnection("D:\\Documents\\NetBeansProjects\\EAMS\\config\\db_params.properties");
+            PreparedStatement ps = conn.prepareStatement("select * from user where email=? and password=? and type='USER'");
+            ps.setString(1, email);
+            ps.setString(2, password);
 
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
+            ResultSet rs = ps.executeQuery();
+            RequestDispatcher rd = null;
 
-            System.out.println(email);
-            System.out.println(password);
-
-            Connection con = null;
+            if (rs.next()) {
+                System.out.println("Login Successfull");
+                rd = request.getRequestDispatcher("UserHome.jsp");
+                HttpSession session = request.getSession();
+                User user = new User();
+                user.setUserId(rs.getInt("userId"));
+                user.setUserName(rs.getString("email"));
+                session.setAttribute("user", user);
+                rd.forward(request, response);
+            } else {
+                System.out.println("Login Failed");
+                rd = request.getRequestDispatcher("Login.jsp");
+                out.println("document.window.alert('Login Failed')");
+                rd.forward(request, response);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
             try {
-                con = ConnectionProviderToDB.getConnectionObject().getConnection("D:\\Documents\\NetBeansProjects\\EAMS\\config\\db_params.properties");
-                PreparedStatement ps = con.prepareStatement("select * from user where email=? and password=? and type='ADMIN'");
-                ps.setString(1, email);
-                ps.setString(2, password);
-
-                ResultSet rs = ps.executeQuery();
-
-                if (rs.next()) {
-                    System.out.println("Login Successful...........");
-                    RequestDispatcher rd = request.getRequestDispatcher("AdminHome.jsp");
-                    HttpSession session = request.getSession();
-                    User user = new User();
-                    user.setUserId(rs.getInt("userId"));
-                    user.setUserName(rs.getString("email"));
-                    session.setAttribute("user", user);
-                    rd.forward(request, response);
-
-                } else {
-                    //failed validation
-                    System.out.println("Login Not Successful...........");
-                    request.setAttribute("error", "Invalid Username or Password");
-                    RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-                    rd.include(request, response);
-                }
-
-            } catch (Exception e) {
-                System.out.println(e);
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

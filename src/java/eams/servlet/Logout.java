@@ -5,13 +5,8 @@
  */
 package eams.servlet;
 
-import eams.bean.User;
-import eams.utilities.ConnectionProviderToDB;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +16,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Windows10
+ * @author Abhradeep
  */
-public class Login extends HttpServlet {
+public class Logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,45 +32,12 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
 
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-
-            System.out.println(email);
-            System.out.println(password);
-
-            Connection con = null;
-            try {
-                con = ConnectionProviderToDB.getConnectionObject().getConnection("D:\\Documents\\NetBeansProjects\\EAMS\\config\\db_params.properties");
-                PreparedStatement ps = con.prepareStatement("select * from user where email=? and password=? and type='ADMIN'");
-                ps.setString(1, email);
-                ps.setString(2, password);
-
-                ResultSet rs = ps.executeQuery();
-
-                if (rs.next()) {
-                    System.out.println("Login Successful...........");
-                    RequestDispatcher rd = request.getRequestDispatcher("AdminHome.jsp");
-                    HttpSession session = request.getSession();
-                    User user = new User();
-                    user.setUserId(rs.getInt("userId"));
-                    user.setUserName(rs.getString("email"));
-                    session.setAttribute("user", user);
-                    rd.forward(request, response);
-
-                } else {
-                    //failed validation
-                    System.out.println("Login Not Successful...........");
-                    request.setAttribute("error", "Invalid Username or Password");
-                    RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-                    rd.include(request, response);
-                }
-
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
+        HttpSession session = request.getSession();
+        session.invalidate();
+        RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+        rd.forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

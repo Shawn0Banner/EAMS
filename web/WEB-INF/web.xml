@@ -25,6 +25,22 @@
         <servlet-name>Register</servlet-name>
         <servlet-class>eams.servlet.Register</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>eams.servlet.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserLogin</servlet-name>
+        <servlet-class>eams.servlet.UserLogin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddAsset</servlet-name>
+        <servlet-class>eams.servlet.AddAsset</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveAsset</servlet-name>
+        <servlet-class>eams.servlet.RemoveAsset</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -36,6 +52,22 @@
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserLogin</servlet-name>
+        <url-pattern>/UserLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAsset</servlet-name>
+        <url-pattern>/AddAsset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveAsset</servlet-name>
+        <url-pattern>/RemoveAsset</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -99,7 +99,58 @@
                 margin-top: 8%;
                 margin-bottom: -15%;
                 color: #495057;
-            }</style></head><body>
+            }
+        </style>
+    </head>
+    
+    <script>
+        // Function to check Whether both passwords 
+        // is same or not. 
+        function checkPassword(form) {
+            password1 = form.password1.value;
+            password2 = form.password2.value;
+            email = form.email.value;
+            
+            
+            var form1 = document.querySelector("form");
+            
+            if(email == ''){
+                alert("Please enter email");
+                return false;
+            }
+            
+            if (password1.length < 6){
+                alert("Password should be 6 characters long");
+                return false;
+            }
+            
+            // If password not entered 
+            if (password1 == ''){
+                alert("Please enter Password");
+                return false;
+            }
+
+            // If confirm password not entered 
+            else if (password2 == ''){
+                alert("Please enter confirm password");
+                return false;
+            }
+
+            // If Not same return False.     
+            else if (password1 != password2) {
+                alert("\nPassword did not match: Please try again...");
+                return false;
+            }
+
+            // If same return True. 
+            else {
+                form1.setAttribute("action", "Register");
+                return true;
+            }
+        }
+    </script> 
+    
+    <body>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
             <div class="container">
@@ -113,7 +164,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#about" style ="color: white">Home</a>
+                            <a class="nav-link js-scroll-trigger" href="index.jsp" style ="color: white">Home</a>
                         </li>
 
                     </ul>
@@ -131,39 +182,42 @@
 
                 </div>
                 <div class="col-md-9 register-right">
+                    <form method="POST" onsubmit="return checkPassword(this)">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <h3 class="register-heading">Registration Form</h3>
+                                <div class="row register-form">
 
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <h3 class="register-heading">Registration Form</h3>
-                            <div class="row register-form">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" name="email" class="form-control" placeholder="Enter Email" value="">
+                                        </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Your Email *" value="">
+                                        <div class="form-group">
+                                            <select class="form-control" name="department">
+                                                <option class="hidden" selected="" disabled="">Please select your department</option>
+                                                <option>HR</option>
+                                                <option>Accounts</option>
+                                                <option>R&D</option>
+                                                <option>IT</option>
+                                                <option>Sales</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password1" class="form-control" placeholder="Enter Password" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password2" class="form-control" placeholder="Confirm Password" value="">
+                                        </div>
+
+
+                                        <input type="submit" class="btnRegister" value="Register">
                                     </div>
-
-                                    <div class="form-group">
-                                        <select class="form-control">
-                                            <option class="hidden" selected="" disabled="">Please select your department</option>
-                                            <option>HR</option>
-                                            <option>Testing</option>
-                                            <option>Developer</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Password *" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Confirm Password *" value="">
-                                    </div>
-
-
-                                    <input type="submit" class="btnRegister" value="Register">
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
 

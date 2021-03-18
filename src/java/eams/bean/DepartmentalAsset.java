@@ -9,7 +9,7 @@ package eams.bean;
  *
  * @author Windows10
  */
-public class StaticAsset {
+public class DepartmentalAsset {
     
     private int modelNo;
     private String type;
