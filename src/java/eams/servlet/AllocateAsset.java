@@ -5,7 +5,6 @@
  */
 package eams.servlet;
 
-import eams.bean.User;
 import eams.utilities.ConnectionProviderToDB;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,9 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Windows10
+ * @author Abhradeep
  */
-public class Register extends HttpServlet {
+public class AllocateAsset extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,60 +43,67 @@ public class Register extends HttpServlet {
 
         Connection conn = null;
         InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
+        
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        int modelNo = Integer.parseInt(request.getParameter("modelNo"));    
+        
+        System.out.println(modelNo);
+        System.out.println(userId);
 
         try (PrintWriter out = response.getWriter()) {
-
             /*
-                Motive is the check whether is entered email is already present or not
-                if not then insert the respective data into the user table 
-                if so then display an error message and redirect the user the same page
-             */
-            User newUser = new User();
-
-            newUser.setUserName(request.getParameter("email"));
-            newUser.setDepartment(request.getParameter("department"));
-            newUser.setPassword(request.getParameter("password1"));
-            newUser.setType("USER");
-            //our system will treat every new user register as a user type and not admin type
-            //our system only has one admin only         
-
+                First the motive is to check if the modelNo and the userId is present or not
+                if so then change the userId against the modelNo in the personal asset table as the entered value
+                if not display an error message and redirect the user to the same page
+            */
+            
+            
             conn = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
-
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from user where email='" + newUser.getUserName()+"'");
-
-            if (rs.next()) {
-                System.out.println("Email Address Already Present");
-                out.print("<script>alert('Email Address Already Present'); window.location.href='Register.jsp';</script>");
-            } else {
-
-                PreparedStatement ps = conn.prepareStatement("insert into user(email, password, department, type) values (?,?,?,?)");
-                ps.setString(1, newUser.getUserName());
-                ps.setString(2, newUser.getPassword());
-                ps.setString(3, newUser.getDepartment());
-                ps.setString(4, newUser.getType());
-
+            Statement userQuery = conn.createStatement();
+            Statement modelQuery = conn.createStatement();
+            
+            //running a query to see if the userId is present in the user table or not
+            ResultSet rs = userQuery.executeQuery("select * from user where userId="+userId);
+            
+            //runing a query to see if the modelNo is present in the personal asset table or not
+            ResultSet rs2 = modelQuery.executeQuery("select * from personalasset where modelNo="+modelNo);
+            
+            
+            if(rs.next() && rs2.next()){
+                /*
+                    If result of both the queries come true then allocate the asset
+                */
+                
+                PreparedStatement ps = conn.prepareStatement("update personalasset set userId=? where modelNo=?");
+                ps.setInt(1, userId);
+                ps.setInt(2, modelNo);
+                
                 int r = ps.executeUpdate();
-
-                if (r > 0) {
-                    System.out.println("New user created SUCCESSFULLY");
-                    RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                
+                if(r>0){
+                    System.out.println("Asset Allocated Successfully");
+                    RequestDispatcher rd = request.getRequestDispatcher("AllocateAsset.jsp");
                     rd.forward(request, response);
-                } else {
-                    System.out.println("New user creation FAILED");
+                }
+                else{
+                    System.out.println("Asset Allocation Failed");
+                    out.println("<script>alert('Asset Allocation Failed')</script>");
                 }
             }
-
-        } catch (Exception e) {
+            else{
+                System.out.println("Either Model No or User Id is not present");
+                out.println("<script>alert('Either Model No or User Id is not present'); window.location.href='AllocateAsset.jsp';</script>");
+            }
+            
+        } catch (Exception e){
             System.out.println(e);
-        } finally {
+        } finally{
             try {
                 conn.close();
             } catch (SQLException ex) {
-                System.out.println(ex);
+                Logger.getLogger(AllocateAsset.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

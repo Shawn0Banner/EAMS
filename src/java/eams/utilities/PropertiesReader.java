@@ -8,6 +8,7 @@ package eams.utilities;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Properties;
 
 /**
@@ -16,11 +17,12 @@ import java.util.Properties;
  */
 public class PropertiesReader {
 
-    public static DbParamProvider readProperties(String propertiesAddress) {
+    public static DbParamProvider readProperties(InputStream inputFile) {
         DbParamProvider dp = new DbParamProvider();
         //read the properties files and extract the properties to set into DbParamProvider class
         try {
-            FileReader reader = new FileReader(propertiesAddress);
+            InputStreamReader reader = new InputStreamReader(inputFile);
+            //FileReader reader = new FileReader(inputFile);
             Properties p = new Properties();
             p.load(reader);
 

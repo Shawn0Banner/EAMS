@@ -199,7 +199,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#about" style ="color: white"><strong>Repair</strong></a>
+                            <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white"><strong>Home</strong></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="Logout" style ="color: white">Logout</a>
@@ -254,11 +254,11 @@
 
 
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input name="category" type="radio" class="custom-control-input" id="addRadio" value="PersonalAsset">
+                            <input name="category" type="radio" class="custom-control-input" id="addRadio" value="personalAsset">
                             <label class="custom-control-label" for="addRadio">Personal Asset</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input name="category" type="radio" class="custom-control-input" id="addRadio1" value="DepartmentalAsset">
+                            <input name="category" type="radio" class="custom-control-input" id="addRadio1" value="departmentalAsset">
                             <label class="custom-control-label" for="addRadio1">Departmental Asset</label>
                         </div>
                         <br>                            
@@ -276,11 +276,11 @@
                         <input type="text" name="type" class="form-control" placeholder="Type" value="" />
 
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input name="category" type="radio" class="custom-control-input" id="removeRadio" value="PersonalAsset">
+                            <input name="category" type="radio" class="custom-control-input" id="removeRadio" value="personalAsset">
                             <label class="custom-control-label" for="removeRadio">Personal Asset</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input name="category" type="radio" class="custom-control-input" id="removeRadio1" value="DepartmentalAsset">
+                            <input name="category" type="radio" class="custom-control-input" id="removeRadio1" value="departmentalAsset">
                             <label class="custom-control-label" for="removeRadio1">Departmental Asset</label>
                         </div>
                         <br>

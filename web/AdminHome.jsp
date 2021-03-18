@@ -150,15 +150,15 @@
             <div class="row">
                 <div class="col-md-6 login-form-1">
                     <div class="photog" >
-                        <a href="#"> <img src="https://www.forescout.com/wp-content/uploads/2019/06/asset-mgmt-post-1-image.jpg" alt=""  height="240" width="250"/> </a>
+                        <a href="AllocateAsset.jsp"> <img src="https://www.forescout.com/wp-content/uploads/2019/06/asset-mgmt-post-1-image.jpg" alt=""  height="240" width="250"/> </a>
                     </div>
                     <div class="description">
                         <h5>Admin can allocate asset</h5>
                     </div>
                     <div class="login-logo">
-                        <a href="#"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
+                        <a href="AllocateAsset.jsp"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
                     </div>
-                    <h3>Insert Asset</h3>
+                    <h3>Allocate Asset</h3>
 
 
                     <!-- <div class="form-group">

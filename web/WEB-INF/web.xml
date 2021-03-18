@@ -41,6 +41,14 @@
         <servlet-name>RemoveAsset</servlet-name>
         <servlet-class>eams.servlet.RemoveAsset</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AllocateAsset</servlet-name>
+        <servlet-class>eams.servlet.AllocateAsset</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeAllocate</servlet-name>
+        <servlet-class>eams.servlet.DeAllocate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -68,6 +76,14 @@
     <servlet-mapping>
         <servlet-name>RemoveAsset</servlet-name>
         <url-pattern>/RemoveAsset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllocateAsset</servlet-name>
+        <url-pattern>/AllocateAsset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeAllocate</servlet-name>
+        <url-pattern>/DeAllocate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

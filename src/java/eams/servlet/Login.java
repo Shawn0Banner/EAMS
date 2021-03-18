@@ -8,6 +8,7 @@ package eams.servlet;
 import eams.bean.User;
 import eams.utilities.ConnectionProviderToDB;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,10 +45,14 @@ public class Login extends HttpServlet {
 
             System.out.println(email);
             System.out.println(password);
+            
+            InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
+            System.out.println(inputFile);
 
             Connection con = null;
             try {
-                con = ConnectionProviderToDB.getConnectionObject().getConnection("D:\\Documents\\NetBeansProjects\\EAMS\\config\\db_params.properties");
+                con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
+                //con = ConnectionProviderToDB.getConnectionObject().getConnection("D:\\Documents\\NetBeansProjects\\EAMS\\config\\db_params.properties");
                 PreparedStatement ps = con.prepareStatement("select * from user where email=? and password=? and type='ADMIN'");
                 ps.setString(1, email);
                 ps.setString(2, password);

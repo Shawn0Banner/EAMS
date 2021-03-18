@@ -5,7 +5,6 @@
  */
 package eams.servlet;
 
-import eams.bean.User;
 import eams.utilities.ConnectionProviderToDB;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,9 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Windows10
+ * @author Abhradeep
  */
-public class Register extends HttpServlet {
+public class DeAllocate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,48 +43,48 @@ public class Register extends HttpServlet {
 
         Connection conn = null;
         InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
+        
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        int modelNo = Integer.parseInt(request.getParameter("modelNo"));
+        
+        System.out.println(userId);
+        System.out.println(modelNo);
 
         try (PrintWriter out = response.getWriter()) {
-
+            
             /*
-                Motive is the check whether is entered email is already present or not
-                if not then insert the respective data into the user table 
-                if so then display an error message and redirect the user the same page
-             */
-            User newUser = new User();
-
-            newUser.setUserName(request.getParameter("email"));
-            newUser.setDepartment(request.getParameter("department"));
-            newUser.setPassword(request.getParameter("password1"));
-            newUser.setType("USER");
-            //our system will treat every new user register as a user type and not admin type
-            //our system only has one admin only         
-
+                First the motive is to check whether the modelId and userId is present or not
+                if so then set the user id against the modelId in the personalasset table as 1(ADMIN ID)
+                if not the display error message and redirect the user to the same page
+            */
+            
+            
             conn = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
-
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from user where email='" + newUser.getUserName()+"'");
-
-            if (rs.next()) {
-                System.out.println("Email Address Already Present");
-                out.print("<script>alert('Email Address Already Present'); window.location.href='Register.jsp';</script>");
-            } else {
-
-                PreparedStatement ps = conn.prepareStatement("insert into user(email, password, department, type) values (?,?,?,?)");
-                ps.setString(1, newUser.getUserName());
-                ps.setString(2, newUser.getPassword());
-                ps.setString(3, newUser.getDepartment());
-                ps.setString(4, newUser.getType());
-
+            Statement userQuery = conn.createStatement();
+            Statement modelQuery = conn.createStatement();
+            
+            ResultSet rs = userQuery.executeQuery("select * from user where userId="+userId);
+            ResultSet rs1 = modelQuery.executeQuery("select * from personalasset where modelNo="+modelNo);
+            
+            if(rs.next() && rs1.next()){
+                PreparedStatement ps = conn.prepareStatement("update personalasset set userId=1 where modelNo=?");
+                ps.setInt(1, modelNo);
+                
                 int r = ps.executeUpdate();
-
-                if (r > 0) {
-                    System.out.println("New user created SUCCESSFULLY");
-                    RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                
+                if(r>0){
+                    System.out.println("Asset De-Allocation Successful");
+                    RequestDispatcher rd = request.getRequestDispatcher("AllocateAsset.jsp");
                     rd.forward(request, response);
-                } else {
-                    System.out.println("New user creation FAILED");
                 }
+                else{
+                    System.out.println("Asset De-Allocation Failed");
+                    out.println("<script>alert('Asset De-Allocation Failed'); window.location.href='AllocateAsset.jsp');</script>");
+                }
+            }
+            else{
+                System.out.println("Either User Id or Model No does not exist");
+                out.println("<script>alert('Either User Id or Model No does not exist'); window.location.href='AllocateAsset.jsp';</script>");
             }
 
         } catch (Exception e) {
@@ -94,10 +93,9 @@ public class Register extends HttpServlet {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                System.out.println(ex);
+                Logger.getLogger(DeAllocate.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

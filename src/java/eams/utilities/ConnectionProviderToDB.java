@@ -17,6 +17,7 @@ package eams.utilities;
 
  
 
+import java.io.InputStream;
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -73,7 +74,7 @@ public class ConnectionProviderToDB {
 
  
 
-    public Connection getConnection(String propertiesAddress) {
+    public Connection getConnection(InputStream inputFile) {
 
         Connection connection = null;
 
@@ -81,7 +82,7 @@ public class ConnectionProviderToDB {
 
         try {
 
-            DbParamProvider dbParamProvider = PropertiesReader.readProperties(propertiesAddress);
+            DbParamProvider dbParamProvider = PropertiesReader.readProperties(inputFile);
 
             //step1 load the driver class
 

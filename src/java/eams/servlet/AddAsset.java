@@ -9,10 +9,13 @@ import eams.bean.DepartmentalAsset;
 import eams.bean.PersonalAsset;
 import eams.utilities.ConnectionProviderToDB;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -41,6 +44,7 @@ public class AddAsset extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String category = request.getParameter("category");
+        int modelNo = Integer.parseInt(request.getParameter("modelNo"));
         System.out.println(request.getParameter("modelNo"));
         System.out.println(request.getParameter("type"));
         System.out.println(request.getParameter("department"));
@@ -49,67 +53,89 @@ public class AddAsset extends HttpServlet {
 
         Connection conn = null;
 
+        InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
+
         try (PrintWriter out = response.getWriter()) {
 
-            conn = ConnectionProviderToDB.getConnectionObject().getConnection("D:\\Documents\\NetBeansProjects\\EAMS\\config\\db_params.properties");
-
+            /*
+                Motive is to check whether the entered modelNo is already present or not
+                if not the enter the respective values into the respective tables
+                if so then display an errror message and redirect the user to the same page
+             */
+            conn = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
             PreparedStatement ps = null;
             int r = 0;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = null;
 
             //checking what kind of an asset is being pushed by the user
             //if personal asset then it would be pushed into the personal asset table
             //else the asset will be pushed into the departmental asset table
             // for the personal asset table
-            if (category.equals("PersonalAsset")) {
-                PersonalAsset asset = new PersonalAsset();
-                asset.setModelNo(Integer.parseInt(request.getParameter("modelNo")));
-                asset.setType(request.getParameter("type"));
-                asset.setDepartment(request.getParameter("department"));
-                asset.setValue(Double.parseDouble(request.getParameter("value")));
-                asset.setStatus("ACTIVE");
+            if (category.equals("personalAsset")) {
+                rs = stmt.executeQuery("select * from personalasset where modelNo=" + modelNo);
 
-                ps = conn.prepareStatement("insert into personalasset(modelNo, userId, type, department, value, status) values(?,?,?,?,?,?)");
-                ps.setInt(1, asset.getModelNo());   //inserting model no into the table
-                ps.setInt(2, 1);    //setting the userId as admin id to the table
-                ps.setString(3, asset.getType());   //setting the asset type to the table
-                ps.setString(4, asset.getDepartment()); //setting the asset department to the table
-                ps.setDouble(5, asset.getValue());  //seting the asset value to the table                
-                ps.setString(6, asset.getStatus()); //setting the 
-                r = ps.executeUpdate();
-
-                if (r > 0) {
-                    System.out.println("Personal Asset Added");
-                    RequestDispatcher rd = request.getRequestDispatcher("EditAsset.jsp");
-                    rd.forward(request, response);
-                    out.print("<html><head></head><body><script>alert('Asset Added')</script></body></html>");
+                if (rs.next()) {
+                    System.out.println("Model No MISTMATCH!");
+                    out.println("<script>alert('Model No MISMATCH'); window.location.href='EditAsset.jsp';</script>");
                 } else {
-                    RequestDispatcher rd = request.getRequestDispatcher("EditAsset.jsp");
-                    rd.forward(request, response);
-                    out.print("<html><head></head><body><script>alert('Asset Added')</script></body></html>");
-                    System.out.println("Personal Asset Not Added");
+                    PersonalAsset asset = new PersonalAsset();
+                    asset.setModelNo(Integer.parseInt(request.getParameter("modelNo")));
+                    asset.setType(request.getParameter("type"));
+                    asset.setDepartment(request.getParameter("department"));
+                    asset.setValue(Double.parseDouble(request.getParameter("value")));
+                    asset.setStatus("ACTIVE");
+
+                    ps = conn.prepareStatement("insert into personalasset(modelNo, userId, type, department, value, status) values(?,?,?,?,?,?)");
+                    ps.setInt(1, asset.getModelNo());   //inserting model no into the table
+                    ps.setInt(2, 1);    //setting the userId as admin id to the table
+                    ps.setString(3, asset.getType());   //setting the asset type to the table
+                    ps.setString(4, asset.getDepartment()); //setting the asset department to the table
+                    ps.setDouble(5, asset.getValue());  //seting the asset value to the table                
+                    ps.setString(6, asset.getStatus()); //setting the 
+                    r = ps.executeUpdate();
+
+                    if (r > 0) {
+                        System.out.println("Personal Asset Added");
+                        RequestDispatcher rd = request.getRequestDispatcher("EditAsset.jsp");
+                        rd.forward(request, response);
+                    } else {
+                        System.out.println("Personal Asset Not Added");
+                    }
                 }
             } //for the department assets table
             else {
-                DepartmentalAsset asset = new DepartmentalAsset();
-                asset.setModelNo(Integer.parseInt(request.getParameter("modelNo")));
-                asset.setType(request.getParameter("type"));
-                asset.setDepartment(request.getParameter("department"));
-                asset.setValue(Double.parseDouble(request.getParameter("value")));
-                asset.setStatus("ACTIVE");
+                rs = stmt.executeQuery("select * from departmentalasset where modelNo=" + modelNo);
 
-                ps = conn.prepareStatement("insert into departmentalasset(modelNo, type, department, value, status) values (?, ?, ?, ?, ?)");
-                ps.setInt(1, asset.getModelNo());   //setting the asset model no to the table
-                ps.setString(2, asset.getType());   //setting the asset type to the table
-                ps.setString(3, asset.getDepartment());
-                ps.setDouble(4, asset.getValue());
-                ps.setString(5, asset.getStatus());
+                if (rs.next()) {
+                    System.out.println("Model No MISMATCH");
+                    out.println("<script>alert('Model No MISMATCH'); window.location.href='EditAsset.jsp';</script>");
+                } 
+                else {
+                    DepartmentalAsset asset = new DepartmentalAsset();
+                    asset.setModelNo(Integer.parseInt(request.getParameter("modelNo")));
+                    asset.setType(request.getParameter("type"));
+                    asset.setDepartment(request.getParameter("department"));
+                    asset.setValue(Double.parseDouble(request.getParameter("value")));
+                    asset.setStatus("ACTIVE");
 
-                r = ps.executeUpdate();
+                    ps = conn.prepareStatement("insert into departmentalasset(modelNo, type, department, value, status) values (?, ?, ?, ?, ?)");
+                    ps.setInt(1, asset.getModelNo());   //setting the asset model no to the table
+                    ps.setString(2, asset.getType());   //setting the asset type to the table
+                    ps.setString(3, asset.getDepartment());
+                    ps.setDouble(4, asset.getValue());
+                    ps.setString(5, asset.getStatus());
 
-                if (r > 0) {
-                    System.out.println("Departmental Asset Added");
-                } else {
-                    System.out.println("Departmental Asset Not Added");
+                    r = ps.executeUpdate();
+
+                    if (r > 0) {
+                        System.out.println("Departmental Asset Added");
+                        RequestDispatcher rd = request.getRequestDispatcher("EditAsset.jsp");
+                        rd.forward(request, response);
+                    } else {
+                        System.out.println("Departmental Asset Not Added");
+                    }
                 }
             }
 

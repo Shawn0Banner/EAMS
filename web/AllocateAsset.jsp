@@ -189,13 +189,13 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="index.jsp" style ="color: white"><strong>Home</strong></a>
+                            <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white"><strong>Home</strong></a>
                         </li>
 
 
 
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#services" style ="color: white">Logout</a>
+                            <a class="nav-link js-scroll-trigger" href="Logout" style ="color: white">Logout</a>
                         </li>
                         <!--  <li class="nav-item">
                            <a class="nav-link js-scroll-trigger" href="#contact"style ="color: white">Contact</a>
@@ -217,7 +217,7 @@
             </div>
 
             <div class="register-info-box">
-                <h2>Need to deallocate assets?</h2>
+                <h2>Need to de-allocate assets?</h2>
                 <p>Click on the button below</p>
                 <label id="label-login" for="log-login-show">Click Here</label>
                 <input type="radio" name="active-log-panel" id="log-login-show">
@@ -226,31 +226,29 @@
             <div class="white-panel">
                 <div class="login-show">
                     <h2>ALLOCATE ASSET </h2>
-                    <form>
-                        <input type="text" class="form-control" placeholder="User ID" value="" />
+                    <form method="post" action="AllocateAsset">
+                        <input type="text" name="userId" class="form-control" placeholder="Enter User ID" value="" />
 
-
-                        <input type="text" class="form-control" placeholder="Asset ID" value="" />
-
-
+                        <input type="text" name="modelNo" class="form-control" placeholder="Enter Model No" value="" />
+                        
                         <br>                            
-                        <input type="button" value="Submit">
+                        <input type="button" value="Submit" onclick="form.submit()">
                     </form>
                 </div>
                 <div class="register-show">
-                    <h2>DEALLOCATE ASSET ASSET</h2>
+                    <h2>DE-ALLOCATE ASSET ASSET</h2>
 
-                    <form>
+                    <form method="post" action="DeAllocate">
 
-                        <input type="text" class="form-control" placeholder="User ID" value="" />
+                        <input type="text" name="userId" class="form-control" placeholder="Enter User ID" value="" />
 
 
-                        <input type="text" class="form-control" placeholder="Asset ID" value="" />
+                        <input type="text" name="modelNo" class="form-control" placeholder="Enter Model No" value="" />
 
 
                         <br>
                         <br>
-                        <input type="button" value="Submit">
+                        <input type="button" value="Submit" onclick="form.submit()">
 
                     </form>
 
