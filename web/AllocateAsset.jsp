@@ -1,3 +1,7 @@
+<%@page import="java.util.ArrayList"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -175,11 +179,18 @@
 
     </head>
 
-    <body>
+    <%
+        ArrayList typeList = (ArrayList) request.getAttribute("typeList");
+        request.setAttribute("typeList", typeList);
+        System.out.println(typeList);
+
+    %>
+
+    <body onload="myFunc(); myFunc2();">
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index.jsp">
                     <img src="https://www.exavalu.com/wp-content/uploads/2019/05/exavaluLogo.png" alt="" width="200" height="50" class="d-inline-block align-mid">
                     ASSET MANAGEMENT
                 </a>
@@ -192,7 +203,9 @@
                             <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white"><strong>Home</strong></a>
                         </li>
 
-
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#" style ="color: white">Users</a>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="Logout" style ="color: white">Logout</a>
@@ -227,10 +240,12 @@
                 <div class="login-show">
                     <h2>ALLOCATE ASSET </h2>
                     <form method="post" action="AllocateAsset">
-                        <input type="text" name="userId" class="form-control" placeholder="Enter User ID" value="" />
+                        <input type="text" name="userEmail" class="form-control" placeholder="Enter User Email" value="" />
 
-                        <input type="text" name="modelNo" class="form-control" placeholder="Enter Model No" value="" />
-                        
+                        <p id="container1" class="form-control">
+
+                        </p>
+
                         <br>                            
                         <input type="button" value="Submit" onclick="form.submit()">
                     </form>
@@ -240,13 +255,10 @@
 
                     <form method="post" action="DeAllocate">
 
-                        <input type="text" name="userId" class="form-control" placeholder="Enter User ID" value="" />
-
-
-                        <input type="text" name="modelNo" class="form-control" placeholder="Enter Model No" value="" />
-
-
+                        <input type="text" name="userEmail" class="form-control" placeholder="Enter User Email" value="" />
                         <br>
+                        <p id="container2" class="form-control">
+                        </p>
                         <br>
                         <input type="button" value="Submit" onclick="form.submit()">
 
@@ -289,7 +301,65 @@
 
         </script>
 
+        <script>
+            function myFunc() {
+                var type = new Array();
 
+            <c:forEach items="${typeList}" var="type">
+                type.push('<c:out value="${type}"></c:out>');
+            </c:forEach>
+
+                for (i = 0; i < type.length; i++) {
+                    var chk = document.createElement('input');  // CREATE CHECK BOX.
+                    chk.setAttribute('type', 'checkbox');       // SPECIFY THE TYPE OF ELEMENT.
+                    chk.setAttribute('id', 'type' + i);     // SET UNIQUE ID.
+                    chk.setAttribute('value', type[i]);
+                    chk.setAttribute('name', 'type');
+
+                    var lbl = document.createElement('label');  // CREATE LABEL.
+                    lbl.setAttribute('for', 'type' + i);
+
+                    // CREATE A TEXT NODE AND APPEND IT TO THE LABEL.
+                    lbl.appendChild(document.createTextNode(type[i]));
+
+                    var br = document.createElement('br');
+
+                    // APPEND THE NEWLY CREATED CHECKBOX AND LABEL TO THE <p> ELEMENT.
+                    container1.appendChild(chk);
+                    container1.appendChild(lbl);
+                    container1.appendChild(br);
+                }
+            }
+
+            function myFunc2() {
+                var type = new Array();
+
+            <c:forEach items="${typeList}" var="type">
+                type.push('<c:out value="${type}"></c:out>');
+            </c:forEach>
+
+                for (i = 0; i < type.length; i++) {
+                    var chk = document.createElement('input');  // CREATE CHECK BOX.
+                    chk.setAttribute('type', 'checkbox');       // SPECIFY THE TYPE OF ELEMENT.
+                    chk.setAttribute('id', 'typea' + i);     // SET UNIQUE ID.
+                    chk.setAttribute('value', type[i]);
+                    chk.setAttribute('name', 'type');
+
+                    var lbl = document.createElement('label');  // CREATE LABEL.
+                    lbl.setAttribute('for', 'type' + i);
+
+                    // CREATE A TEXT NODE AND APPEND IT TO THE LABEL.
+                    lbl.appendChild(document.createTextNode(type[i]));
+
+                    var br = document.createElement('br');
+
+                    // APPEND THE NEWLY CREATED CHECKBOX AND LABEL TO THE <p> ELEMENT.
+                    container2.appendChild(chk);
+                    container2.appendChild(lbl);
+                    container2.appendChild(br);
+                }
+            }
+        </script>
 
         <!-- Footer -->
         <footer class="py-5 bg-dark" style="margin-top: 280px">

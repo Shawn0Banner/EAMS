@@ -54,7 +54,8 @@ public class Register extends HttpServlet {
              */
             User newUser = new User();
 
-            newUser.setUserName(request.getParameter("email"));
+            newUser.setEmail(request.getParameter("email"));
+            newUser.setUserName(request.getParameter("userName"));
             newUser.setDepartment(request.getParameter("department"));
             newUser.setPassword(request.getParameter("password1"));
             newUser.setType("USER");
@@ -71,11 +72,12 @@ public class Register extends HttpServlet {
                 out.print("<script>alert('Email Address Already Present'); window.location.href='Register.jsp';</script>");
             } else {
 
-                PreparedStatement ps = conn.prepareStatement("insert into user(email, password, department, type) values (?,?,?,?)");
+                PreparedStatement ps = conn.prepareStatement("insert into user(userName, email, password, department, type) values (?,?,?,?,?)");
                 ps.setString(1, newUser.getUserName());
-                ps.setString(2, newUser.getPassword());
-                ps.setString(3, newUser.getDepartment());
-                ps.setString(4, newUser.getType());
+                ps.setString(2, newUser.getEmail());
+                ps.setString(3, newUser.getPassword());
+                ps.setString(4, newUser.getDepartment());
+                ps.setString(5, newUser.getType());
 
                 int r = ps.executeUpdate();
 

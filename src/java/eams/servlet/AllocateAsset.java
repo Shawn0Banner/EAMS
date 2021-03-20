@@ -43,61 +43,86 @@ public class AllocateAsset extends HttpServlet {
 
         Connection conn = null;
         InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
+
+        String userEmail = request.getParameter("userEmail");
+        String types[] = request.getParameterValues("type");
+
+        for (String type : types) {
+            System.out.println(type);
+        }
         
-        int userId = Integer.parseInt(request.getParameter("userId"));
-        int modelNo = Integer.parseInt(request.getParameter("modelNo"));    
-        
-        System.out.println(modelNo);
-        System.out.println(userId);
+        System.out.println(userEmail);
 
         try (PrintWriter out = response.getWriter()) {
             /*
-                First the motive is to check if the modelNo and the userId is present or not
-                if so then change the userId against the modelNo in the personal asset table as the entered value
-                if not display an error message and redirect the user to the same page
-            */
-            
-            
+                Check if the userId is present in the user table
+                Check if the userId has an asset allocated of selected type
+                    if so 
+                        print error
+                    else
+                        allocate asset
+             */
+
             conn = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
-            Statement userQuery = conn.createStatement();
-            Statement modelQuery = conn.createStatement();
+            Statement stmt = conn.createStatement();
             
-            //running a query to see if the userId is present in the user table or not
-            ResultSet rs = userQuery.executeQuery("select * from user where userId="+userId);
+            //user exists or not
+            ResultSet rs1 = stmt.executeQuery("select * from user where email='"+userEmail+"'");
             
-            //runing a query to see if the modelNo is present in the personal asset table or not
-            ResultSet rs2 = modelQuery.executeQuery("select * from personalasset where modelNo="+modelNo);
-            
-            
-            if(rs.next() && rs2.next()){
-                /*
-                    If result of both the queries come true then allocate the asset
-                */
+            if(rs1.next()){
+                int userId=rs1.getInt("userId");
+                System.out.println(userId);
+                String userDepartment = rs1.getString("department");
                 
-                PreparedStatement ps = conn.prepareStatement("update personalasset set userId=? where modelNo=?");
-                ps.setInt(1, userId);
-                ps.setInt(2, modelNo);
-                
-                int r = ps.executeUpdate();
-                
-                if(r>0){
-                    System.out.println("Asset Allocated Successfully");
-                    RequestDispatcher rd = request.getRequestDispatcher("AllocateAsset.jsp");
-                    rd.forward(request, response);
-                }
-                else{
-                    System.out.println("Asset Allocation Failed");
-                    out.println("<script>alert('Asset Allocation Failed')</script>");
+                for (String type: types){
+                    //checking if the user already has a checked type asset asssigned
+                    PreparedStatement ps = conn.prepareStatement("select * from personalasset where userId=? and type=?");
+                    ps.setInt(1, userId);
+                    ps.setString(2, type);
+                    
+                    ResultSet rs2 = ps.executeQuery();
+                    
+                    if(rs2.next()){
+                        System.out.println("USER ALREADY HAS A "+rs2.getString("type"));
+                    }
+                    else{
+                        //checking if there are assets of the cheked type not allocated to any user other than the admin
+                        //selecting only the assets which are allocated to admin and department is equal to the user type
+                        ps = conn.prepareStatement("select * from personalasset where userId=1 and type=? and department=?");
+
+                        ps.setString(1, type);
+                        ps.setString(2, userDepartment);
+                        
+                        ResultSet rs3 = ps.executeQuery();
+                        
+                        if(rs3.next()){
+                            //updating the first row with the input user id
+                            PreparedStatement ps1 = conn.prepareStatement("update personalasset set userId=? where modelNo=?");
+                            ps1.setInt(1, userId);
+                            ps1.setInt(2, rs3.getInt("modelNo"));
+                            
+                            int r = ps1.executeUpdate();
+                            
+                            if(r>0){
+                                System.out.println("Asset Allocated");
+                                out.println("<script>alert('All Assets Allocated'); window.location.href='AdminHome.jsp';</script>");
+                            }
+                        }
+                        else{
+                            System.out.println("ALL ASSETS ALLOCATED OR FREE ASSET NOT FOUND");
+                            out.println("<script>alert('ALL ASSETS ALLOCATED OR ASSET NOT FOUND'); window.location.href='AdminHome.jsp';</script>");
+                        }
+                    }
                 }
             }
             else{
-                System.out.println("Either Model No or User Id is not present");
-                out.println("<script>alert('Either Model No or User Id is not present'); window.location.href='AllocateAsset.jsp';</script>");
+                System.out.println("User DOESNOT EXIST");
+                out.println("<script>alert('USER DOES NOT EXIST'); window.location.href='AdminHome.jsp';</script>");
             }
             
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
-        } finally{
+        } finally {
             try {
                 conn.close();
             } catch (SQLException ex) {

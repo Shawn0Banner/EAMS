@@ -102,7 +102,7 @@
             }
         </style>
     </head>
-    
+
     <script>
         // Function to check Whether both passwords 
         // is same or not. 
@@ -110,28 +110,28 @@
             password1 = form.password1.value;
             password2 = form.password2.value;
             email = form.email.value;
-            
-            
+
+
             var form1 = document.querySelector("form");
-            
-            if(email == ''){
+
+            if (email == '') {
                 alert("Please enter email");
                 return false;
             }
-            
-            if (password1.length < 6){
+
+            if (password1.length < 6) {
                 alert("Password should be 6 characters long");
                 return false;
             }
-            
+
             // If password not entered 
-            if (password1 == ''){
+            if (password1 == '') {
                 alert("Please enter Password");
                 return false;
             }
 
             // If confirm password not entered 
-            else if (password2 == ''){
+            else if (password2 == '') {
                 alert("Please enter confirm password");
                 return false;
             }
@@ -149,12 +149,12 @@
             }
         }
     </script> 
-    
+
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index.jsp">
                     <img src="https://www.exavalu.com/wp-content/uploads/2019/05/exavaluLogo.png" alt="" width="200" height="50" class="d-inline-block align-mid">
                     ASSET MANAGEMENT
                 </a>
@@ -190,7 +190,11 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="email" class="form-control" placeholder="Enter Email" value="">
+                                            <input type="email" name="email" class="form-control" placeholder="Enter Email" value="">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <input type="text" name="userName" class="form-control" placeholder="Enter User Name" value="">
                                         </div>
 
                                         <div class="form-group">

@@ -12,10 +12,11 @@ package eams.bean;
 public class User {
     private int userId;
     private String userName;
+    private String email;
     private String password;
     private String department;
     private String type;
-
+    
 
     /**
      * @return the userId
@@ -32,17 +33,17 @@ public class User {
     }
 
     /**
-     * @return the userName
+     * @return the email
      */
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
     /**
-     * @param userName the userName to set
+     * @param email the email to set
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
@@ -86,4 +87,19 @@ public class User {
     public void setType(String type) {
         this.type = type;
     }
+
+    /**
+     * @return the userName
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
 }

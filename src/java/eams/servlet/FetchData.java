@@ -10,12 +10,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Abhradeep
  */
-public class DeAllocate extends HttpServlet {
+public class FetchData extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,51 +40,27 @@ public class DeAllocate extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        Connection conn = null;
-        InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
-       
-        String userEmail = request.getParameter("userEmail");
-        String types[] = request.getParameterValues("type");
         
-        for(String type: types){
-            System.out.println(type);
-        }
+        Connection conn = null;
+        
+        ArrayList<String> typeList = new ArrayList<String>();
         
         try (PrintWriter out = response.getWriter()) {
-            
-            /*
-                First the motive is to check whether the userId is present or not
-                if so then set the user id against the modelId in the personalasset table as 1(ADMIN ID)
-                if not the display error message and redirect the user to the same page
-            */
-            
+            InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
             conn = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
+            
             Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select distinct(type) from personalasset");
             
-            //query to search for a user in the user table using his or her emailId
-            ResultSet rs = stmt.executeQuery("select * from user where email='"+userEmail+"'");
+            while (rs.next()) {
+                String type = rs.getString("type");
+                System.out.println(type);
+                typeList.add(type);
+            }
             
-            if(rs.next()){
-                for(String type: types){
-                    PreparedStatement ps = conn.prepareStatement("update personalasset set userId=1 where type=?");
-                    ps.setString(1, type);
-                    
-                    int r = ps.executeUpdate();
-                    
-                    if(r>0){
-                        System.out.println("ASSETS DE-ALLOCATED FROM USER");
-                        out.println("<script>alert('ASSETS DE-ALLOCATED FROM USER'); window.location.href='AdminHome.jsp';</script>");
-                    } else{
-                        System.out.println("SOME ERROR");
-                        out.println("<script>alert('SOME ERROR'); window.location.href='AdminHome.jsp';</script>");
-                    }
-                }
-            }
-            else{
-                System.out.println("USER NOT FOUND");
-                out.println("<script>alert('USER NOT FOUND'); window.href.location='AdminHome.jsp';</script>");
-            }
+            request.setAttribute("typeList", typeList);
+            RequestDispatcher rd = request.getRequestDispatcher("AllocateAsset.jsp");
+            rd.forward(request, response);
             
         } catch (Exception e) {
             System.out.println(e);
@@ -91,7 +68,7 @@ public class DeAllocate extends HttpServlet {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(DeAllocate.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FetchData.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

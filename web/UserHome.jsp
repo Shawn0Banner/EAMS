@@ -132,7 +132,7 @@
                     <div class="card">
                         <img src="https://revisionprocess.com/wp-content/uploads/2015/10/problem-solution2.jpg" alt="Denim Jeans" style="width:300px;height:300px">
                         <p style="font-color : black ; font-weight: bold ">Using the below button you can see generate request for your assets.</p>
-                        <p><button>Raise Request</button></p>
+                        <p><button onclick="window.location.href='RaiseRequest.jsp'">Raise Request</button></p>
                     </div>
                 </div>
             </div>

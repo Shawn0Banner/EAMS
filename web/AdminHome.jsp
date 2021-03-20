@@ -120,7 +120,7 @@
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index.jsp">
                     <img src="https://www.exavalu.com/wp-content/uploads/2019/05/exavaluLogo.png" alt="" width="200" height="50" class="d-inline-block align-mid">
                     ASSET MANAGEMENT
                 </a>
@@ -150,13 +150,13 @@
             <div class="row">
                 <div class="col-md-6 login-form-1">
                     <div class="photog" >
-                        <a href="AllocateAsset.jsp"> <img src="https://www.forescout.com/wp-content/uploads/2019/06/asset-mgmt-post-1-image.jpg" alt=""  height="240" width="250"/> </a>
+                        <a href="FetchData"> <img src="https://www.forescout.com/wp-content/uploads/2019/06/asset-mgmt-post-1-image.jpg" alt=""  height="240" width="250"/> </a>
                     </div>
                     <div class="description">
                         <h5>Admin can allocate asset</h5>
                     </div>
                     <div class="login-logo">
-                        <a href="AllocateAsset.jsp"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
+                        <a href="FetchData"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
                     </div>
                     <h3>Allocate Asset</h3>
 
