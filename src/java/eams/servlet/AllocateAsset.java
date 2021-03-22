@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +49,7 @@ public class AllocateAsset extends HttpServlet {
         for (String type : types) {
             System.out.println(type);
         }
-        
+
         System.out.println(userEmail);
 
         try (PrintWriter out = response.getWriter()) {
@@ -65,61 +64,63 @@ public class AllocateAsset extends HttpServlet {
 
             conn = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
             Statement stmt = conn.createStatement();
-            
+
             //user exists or not
-            ResultSet rs1 = stmt.executeQuery("select * from user where email='"+userEmail+"'");
-            
-            if(rs1.next()){
-                int userId=rs1.getInt("userId");
+            ResultSet rs1 = stmt.executeQuery("select * from user where email='" + userEmail + "'");
+
+            if (rs1.next()) {
+                int userId = rs1.getInt("userId");
                 System.out.println(userId);
                 String userDepartment = rs1.getString("department");
-                
-                for (String type: types){
+
+                for (String type : types) {
                     //checking if the user already has a checked type asset asssigned
                     PreparedStatement ps = conn.prepareStatement("select * from personalasset where userId=? and type=?");
                     ps.setInt(1, userId);
                     ps.setString(2, type);
-                    
+
                     ResultSet rs2 = ps.executeQuery();
-                    
-                    if(rs2.next()){
-                        System.out.println("USER ALREADY HAS A "+rs2.getString("type"));
-                    }
-                    else{
+
+                    if (rs2.next()) {
+                        System.out.println("USER ALREADY HAS A " + rs2.getString("type"));
+                    } else {
                         //checking if there are assets of the cheked type not allocated to any user other than the admin
                         //selecting only the assets which are allocated to admin and department is equal to the user type
                         ps = conn.prepareStatement("select * from personalasset where userId=1 and type=? and department=?");
 
                         ps.setString(1, type);
                         ps.setString(2, userDepartment);
-                        
+
                         ResultSet rs3 = ps.executeQuery();
-                        
-                        if(rs3.next()){
+
+                        if (rs3.next()) {
                             //updating the first row with the input user id
                             PreparedStatement ps1 = conn.prepareStatement("update personalasset set userId=? where modelNo=?");
                             ps1.setInt(1, userId);
                             ps1.setInt(2, rs3.getInt("modelNo"));
-                            
+
                             int r = ps1.executeUpdate();
-                            
-                            if(r>0){
+
+                            //asset is allocated
+                            if (r > 0) {
                                 System.out.println("Asset Allocated");
                                 out.println("<script>alert('All Assets Allocated'); window.location.href='AdminHome.jsp';</script>");
+                            } else {
+                                System.out.println("SOME ERROR!");
+                                out.println("<script>alert('SOME ERROR'); window.location.href='AdminHome.jsp';</script>");
                             }
-                        }
-                        else{
+                        } else {
                             System.out.println("ALL ASSETS ALLOCATED OR FREE ASSET NOT FOUND");
                             out.println("<script>alert('ALL ASSETS ALLOCATED OR ASSET NOT FOUND'); window.location.href='AdminHome.jsp';</script>");
                         }
                     }
                 }
-            }
-            else{
+            } //the entered email id has not been found in the user table 
+            else {
                 System.out.println("User DOESNOT EXIST");
                 out.println("<script>alert('USER DOES NOT EXIST'); window.location.href='AdminHome.jsp';</script>");
             }
-            
+
         } catch (Exception e) {
             System.out.println(e);
         } finally {

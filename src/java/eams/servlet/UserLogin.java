@@ -62,7 +62,7 @@ public class UserLogin extends HttpServlet {
                 HttpSession session = request.getSession();
                 User user = new User();
                 user.setUserId(rs.getInt("userId"));
-                user.setUserName(rs.getString("email"));
+                user.setUserName(rs.getString("userName"));
                 session.setAttribute("user", user);
                 rd.forward(request, response);
             } else {

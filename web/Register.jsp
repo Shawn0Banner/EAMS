@@ -226,7 +226,7 @@
             </div>
 
         </div>   <br><br>
-        <footer class="py-5 bg-dark">
+        <footer class="py-3 bg-dark fixed-bottom">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
             </div>

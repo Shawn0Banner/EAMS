@@ -111,8 +111,7 @@ public class AddAsset extends HttpServlet {
                 if (rs.next()) {
                     System.out.println("Model No MISMATCH");
                     out.println("<script>alert('Model No MISMATCH'); window.location.href='EditAsset.jsp';</script>");
-                } 
-                else {
+                } else {
                     DepartmentalAsset asset = new DepartmentalAsset();
                     asset.setModelNo(Integer.parseInt(request.getParameter("modelNo")));
                     asset.setType(request.getParameter("type"));

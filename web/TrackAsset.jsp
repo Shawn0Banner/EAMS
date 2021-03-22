@@ -1,3 +1,8 @@
+<%@page import="java.util.ArrayList"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +17,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-        <title>Edit Asset</title>
+        <title>Track Asset</title>
 
 
 
@@ -23,7 +28,7 @@
                 font-family: 'Mukta', sans-serif;
                 height:100vh;
                 min-height:550px;
-                background-image: url(http://www.planwallpaper.com/static/images/Free-Wallpaper-Nature-Scenes.jpg);
+                background-image: url(https://source.unsplash.com/1400x800/?technology,computer);
                 background-repeat: no-repeat;
                 background-size:cover;
                 background-position:center;
@@ -171,25 +176,21 @@
                 text-decoration:none;
                 color:#2c7715;
             }
-
-            .btnSubmit{
-                font-weight: 600;
-                width: 50%;
-                color: #282726;
-                background-color: #fff;
-                border: none;
-                border-radius: 1.5rem;
-                padding:2%;
-            }
         </style>
 
     </head>
 
-    <body>
+    <%
+        ArrayList<String> typeList = (ArrayList) request.getAttribute("typeList");
+    %>
+
+
+
+    <body onload="myFunc()">
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="index.jsp">
+                <a class="navbar-brand" href="#">
                     <img src="https://www.exavalu.com/wp-content/uploads/2019/05/exavaluLogo.png" alt="" width="200" height="50" class="d-inline-block align-mid">
                     ASSET MANAGEMENT
                 </a>
@@ -199,10 +200,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white"><strong>Home</strong></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#" style ="color: white">Repair</a>
+                            <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="Logout" style ="color: white">Logout</a>
@@ -220,78 +218,46 @@
 
         <div class="login-reg-panel">
             <div class="login-info-box">
-                <h2>Want to add asset?</h2>
+                <h2>Want to track by Department?</h2>
                 <p>Click on the button below</p>
                 <label id="label-register" for="log-reg-show">Click Here</label>
                 <input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked">
             </div>
 
             <div class="register-info-box">
-                <h2>Need to remove assets?</h2>
-                <p>Click on the button below</p>
-                <label id="label-login" for="log-login-show">Click Here</label>
-                <input type="radio" name="active-log-panel" id="log-login-show">
+                <br>
+                <br>
+                <h4>A report will be generated according to the selected department</h4>                
             </div>
 
             <div class="white-panel">
                 <div class="login-show">
-                    <h2>ADD ASSET</h2>
-                    <form method="POST" action="AddAsset">
-                        <input type="text" name="modelNo" class="form-control" placeholder="Model no." value="" />
-
-
-                        <input type="text" name="type" class="form-control" placeholder="Type" value="" />
-
-
+                    <h2>Track Asset Details</h2>
+                    <br><br>
+                    <form method="post" action="Track">
                         <select class="form-control form-control-lg" name="department">
                             <option class="hidden" selected="" disabled="">Please select department</option>
-                            <option>HR</option>
-                            <option>Accounts</option>
-                            <option>R & D</option>
-                            <option>IT</option>
-                            <option>Sales</option>
+                            <option value="HR">HR</option>
+                            <option value="Accounts">Accounts</option>
+                            <option value="R&D">R & D</option>
+                            <option value="IT">IT</option>
+                            <option value="Sales">Sales</option>
                         </select>
 
-
-                        <input type="text" name="value" class="form-control" placeholder="Value" value="" />
-
-
+                        <br><br>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input name="category" type="radio" class="custom-control-input" id="addRadio" value="personalAsset">
-                            <label class="custom-control-label" for="addRadio">Personal Asset</label>
+                            <input name="category" type="radio" class="custom-control-input" id="customRadio1" name="example" value="personalasset">
+                            <label class="custom-control-label"  for="customRadio1">Personal Asset</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input name="category" type="radio" class="custom-control-input" id="addRadio1" value="departmentalAsset">
-                            <label class="custom-control-label" for="addRadio1">Departmental Asset</label>
+                            <input name="category" type="radio" class="custom-control-input" id="customRadio2" name="example" value="departmentalasset">
+                            <label class="custom-control-label" for="customRadio2">Departmental Asset</label>
                         </div>
-                        <br>                            
-                        <input type="button" value="Add" onclick="form.submit()">
-                    </form>
+                        <br><br>                            
+                        <input type="button" value="View" onclick="form.submit()">
+                    </form>                    
                 </div>
                 <div class="register-show">
-                    <h2>REMOVE ASSET</h2>
-
-                    <form method="POST" action="RemoveAsset">
-
-                        <input type="text" name="modelNo" class="form-control" placeholder="Model no." value="" />
-
-
-                        <input type="text" name="type" class="form-control" placeholder="Type" value="" />
-
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input name="category" type="radio" class="custom-control-input" id="removeRadio" value="personalAsset">
-                            <label class="custom-control-label" for="removeRadio">Personal Asset</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input name="category" type="radio" class="custom-control-input" id="removeRadio1" value="departmentalAsset">
-                            <label class="custom-control-label" for="removeRadio1">Departmental Asset</label>
-                        </div>
-                        <br>
-                        <br>
-                        <input type="button" value="Remove" onclick="form.submit()">
-
-                    </form>
-
                 </div>
             </div>
         </div>
@@ -321,12 +287,15 @@
                     $('.register-show').removeClass('show-log-panel');
                 }
             });
+
+
+
         </script>
 
 
 
         <!-- Footer -->
-        <footer class="py-3 bg-dark fixed-bottom">
+        <footer class="py-3 bg-dark fixed-bottom" style="margin-top: 280px">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
             </div>
@@ -336,7 +305,4 @@
 
 
     </body>
-
-
-
 </html>

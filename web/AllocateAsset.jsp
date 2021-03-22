@@ -200,11 +200,11 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white"><strong>Home</strong></a>
+                            <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#" style ="color: white">Users</a>
+                            <a class="nav-link js-scroll-trigger" href="Users.jsp" style ="color: white">Users</a>
                         </li>
 
                         <li class="nav-item">
@@ -362,7 +362,7 @@
         </script>
 
         <!-- Footer -->
-        <footer class="py-5 bg-dark" style="margin-top: 280px">
+        <footer class="py-3 bg-dark fixed-bottom">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
             </div>
@@ -372,7 +372,4 @@
 
 
     </body>
-
-
-
 </html>

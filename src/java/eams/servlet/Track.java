@@ -5,6 +5,7 @@
  */
 package eams.servlet;
 
+import eams.bean.PersonalAsset;
 import eams.utilities.ConnectionProviderToDB;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -26,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Abhradeep
  */
-public class RemoveAsset extends HttpServlet {
+public class Track extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,84 +43,67 @@ public class RemoveAsset extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        /*
-           Objective is to first get the category from the user and then according to the category
-            delete the asset from that category based on the modelNo of that asset
-         */
         Connection conn = null;
-        String category = request.getParameter("category");
-        int modelNo = Integer.parseInt(request.getParameter("modelNo"));
-        int r = 0;
 
+        String department = request.getParameter("department");
+        String category = request.getParameter("category");
         InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
 
-        System.out.println(category);
-
         try (PrintWriter out = response.getWriter()) {
-            /*
-                Motive is to check whether the entered model is present in the respective table or not
-                if not then
-             */
-
             conn = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
 
-            Statement stmt = conn.createStatement();
-            ResultSet rs = null;
+            if (category.equals("personalasset")) { //personal asset part
 
-            if (category.equals("personalAsset")) {
-                //delition of personal asset portion
-                rs = stmt.executeQuery("select * from personalasset where modelNo=" + modelNo);
+                //query to get the full table
+                PreparedStatement ps = conn.prepareStatement("select * from personalasset where department=?");
+                ps.setString(1, department);
+                ResultSet mainTable = ps.executeQuery();
 
-                if (rs.next()) {
-                    PreparedStatement ps = conn.prepareStatement("delete from personalasset where modelNo=?");
-                    ps.setInt(1, modelNo);
+                //query to get the total no assets in each department
+                ps = conn.prepareStatement("select type as 'Asset Name', count(type) as 'Total' from personalasset where department=? group by type");
+                ps.setString(1, department);
+                ResultSet totalAssetTable = ps.executeQuery();
 
-                    r = ps.executeUpdate();
+                //query to get the total active assets
+                ps = conn.prepareStatement("select type as 'Asset Name', count(type) as 'Total Active Assets' from personalasset where status='ACTIVE' and department=? group by type");
+                ps.setString(1, department);
+                ResultSet activeAssets = ps.executeQuery();
 
-                    if (r > 0) {
-                        System.out.println("Personal Asset Delete Successfully");
-                        RequestDispatcher rd = request.getRequestDispatcher("EditAsset.jsp");
-                        rd.forward(request, response);
-                    } else {
-                        System.out.println("Asset Delete Failed");
-                    }
-                } else {
-                    System.out.println("Model No NOT PRESENT");
-                    out.println("<script>alert('Model No NOT PRESENT'); window.location.href='EditAsset.jsp';</script>");
-                }
+                request.setAttribute("mainTable", mainTable);
+                request.setAttribute("totalAssetTable", totalAssetTable);
+                request.setAttribute("activeAssets", activeAssets);
+                RequestDispatcher rd = request.getRequestDispatcher("PersonalAssetDisplay.jsp");
+                rd.forward(request, response);
+            } else {    //departmental asset part
 
-            } //deletion of departmental asset portion
-            else {
-                rs = stmt.executeQuery("select * from departmentalasset where modelNo=" + modelNo);
+                //query to get the full table
+                PreparedStatement ps = conn.prepareStatement("select * from personalasset where department=?");
+                ps.setString(1, department);
+                ResultSet mainTable = ps.executeQuery();
 
-                if (rs.next()) {
-                    PreparedStatement ps = conn.prepareStatement("delete from departmentalasset where modelNo=?");
-                    ps.setInt(1, modelNo);
+                //query to get the total no assets in each department
+                ps = conn.prepareStatement("select type as 'Asset Name', count(type) as 'Total' from personalasset where department=? group by type");
+                ps.setString(1, department);
+                ResultSet totalAssetTable = ps.executeQuery();
 
-                    r = ps.executeUpdate();
+                //query to get the total active assets
+                ps = conn.prepareStatement("select type as 'Asset Name', count(type) as 'Total Active Assets' from departmentalasset where status='ACTIVE' and department=? group by type");
+                ps.setString(1, department);
+                ResultSet activeAssets = ps.executeQuery();
 
-                    if (r > 0) {
-                        System.out.println("Departmental Asset Deletion Successfull");
-                        RequestDispatcher rd = request.getRequestDispatcher("EditAsset.jsp");
-                        rd.forward(request, response);
-                    } else {
-                        System.out.println("Departmental Asset Delition Failed");
-                        out.println("<script>alert('Deletion Failed');</script>");
-                    }
-                }
-                else{
-                    System.out.println("Model No NOT PRESENT");
-                    out.println("<script>alert('Model No NOT PRESENT'); window.location.href='EditAsset.jsp';</script>");
-                }
+                request.setAttribute("mainTable", mainTable);
+                request.setAttribute("totalAssetTable", totalAssetTable);
+                request.setAttribute("activeAssets", activeAssets);
+                RequestDispatcher rd = request.getRequestDispatcher("DepartmentalAssetDisplay.jsp");
+                rd.forward(request, response);
             }
-
         } catch (Exception e) {
             System.out.println(e);
         } finally {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(RemoveAsset.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

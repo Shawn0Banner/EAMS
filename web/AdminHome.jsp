@@ -130,13 +130,13 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" style="font-weight: bold; color: white">USER ID: <c:out value="${user.getUserId()}"></c:out></a>
-                        </li>
-                        <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" style="font-weight: bold; color: white">Email: <c:out value="${user.getUserName()}"></c:out></a>
+                            <a class="nav-link js-scroll-trigger" style="color: white">User ID: <c:out value="${user.getUserId()}"></c:out></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger" style="color: white">User Name: <c:out value="${user.getUserName()}"></c:out></a>
                         </li>
                         <li class ="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="Logout" style="font-weight: bold; color: white">Logout</a>
+                            <a class="nav-link js-scroll-trigger" href="Logout" style="color: white">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -159,12 +159,6 @@
                         <a href="FetchData"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
                     </div>
                     <h3>Allocate Asset</h3>
-
-
-                    <!-- <div class="form-group">
-                        <a href="#" class="btnForgetPwd">Forget Password?</a>
-                    </div> -->
-
                 </div>
                 <div class="col-md-6 login-form-2" id="change2">
                     <div class="photog" >
@@ -177,29 +171,24 @@
                         <a href="EditAsset.jsp"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
                     </div>
                     <h3>Edit Asset</h3>
-
-
                 </div>
                 <div class="col-md-6 login-form-3" id="change">
                     <div class="photog" >
-                        <img src="https://people-hunters.com/wp-content/uploads/2019/10/How-Does-An-Asset-Based-Loan-Work.jpg" alt=""  height="240" width="250"/>
+                        <a href="TrackAsset.jsp"><img src="https://people-hunters.com/wp-content/uploads/2019/10/How-Does-An-Asset-Based-Loan-Work.jpg" alt=""  height="240" width="250"/></a>
                     </div>
                     <div class="description">
                         <h5>Admin can track asset</h5>
                     </div>
                     <div class="login-logo">
-                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                        <a href="TrackAsset.jsp"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
                     </div>
-                    <h3>Track</h3>
-
-                    </form>
+                    <h3>Track</h3>                    
                 </div>
-
             </div>
         </div>
 
 
-        <footer class="py-5 bg-dark">
+        <footer class="py-3 bg-dark fixed-bottom">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
             </div>
