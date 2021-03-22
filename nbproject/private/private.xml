@@ -3,23 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/servlet/RemoveAsset.java</file>
             <file>file:/D:/Documents/NetBeansProjects/EAMS/web/UserHome.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/utilities/PropertiesReader.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/bean/PersonalAsset.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/PersonalAssetDisplay.jsp</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/servlet/RemoveAsset.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/servlet/RaiseRequest.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/TrackAsset.jsp</file>
             <file>file:/D:/Documents/NetBeansProjects/EAMS/web/Register.jsp</file>
             <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/servlet/AddAsset.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/index.jsp</file>
             <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/servlet/UserLogin.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/AllocateAsset.jsp</file>
             <file>file:/D:/Documents/NetBeansProjects/EAMS/web/AdminHome.jsp</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/AllocateAsset.jsp</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/servlet/Track.java</file>
             <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/bean/User.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/servlet/Register.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/servlet/AllocateAsset.java</file>
             <file>file:/D:/Documents/NetBeansProjects/EAMS/web/EditAsset.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/servlet/DeAllocate.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/DepartmentalAssetDisplay.jsp</file>
             <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/servlet/Login.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/utilities/ConnectionProviderToDB.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/src/java/eams/utilities/DbParamProvider.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/Login.jsp</file>
             <file>file:/D:/Documents/NetBeansProjects/EAMS/web/RaiseRequest.jsp</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/Users.jsp</file>
         </group>
     </open-files>
 </project-private>

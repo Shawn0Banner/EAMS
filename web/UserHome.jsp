@@ -1,6 +1,11 @@
 <%@page import="eams.bean.User"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="eams.utilities.ConnectionProviderToDB"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.io.InputStream"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +16,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>User-Home_Page</title>
+        <title>User-Raise_Request</title>
 
         <!-- Bootstrap core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,12 +27,37 @@
 
 
 
+        <!-- Style -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
-
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"> 
 
 
+        <script>
+            function myFunction() {
+                // Declare variables
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("sailorTable");
+                tr = table.getElementsByTagName("tr");
+
+                // Loop through all table rows, and hide those who don't match the search query
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        </script>
 
 
 
@@ -36,42 +66,202 @@
 
 
 
-            .card {
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                max-width: 300px;
-                margin: auto;
+            #sailorTable tr.header, #sailorTable tr:hover {
+                /* Add a grey background color to the table header and on hover */
+                background-color: #cc0000;
+                color:white;
+
+            }
+
+
+            .radio-inline
+            {
+
+
+                font-color : white ; 
+                font-weight: bold ;
+                font-size: 18px; 
+            }
+
+            .login-container{
+                margin-top: 5%;
+                margin-bottom: 5%;
+            }
+            .login-logo{
+                position: relative;
+                margin-left: -41.5%;
+            }
+            .login-logo img{
+                position: absolute;
+                width: 20%;
+                margin-top: 19%;
+                background: #282726;
+                border-radius: 4.5rem;
+                padding: 5%;
+            }
+            .login-form-1{
+                padding: 9%;
+                background:#cc0000;
+                box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+            }
+            .login-form-1 h3{
                 text-align: center;
-                font-family: arial;
-                border : 4 px;
-                border-color: black;
-                background-color :#cc0000;
-
+                margin-bottom:12%;
+                color:#fff;
+            }
+            .login-form-2{
+                padding: 9%;
+                background: grey;
+                box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+            }
+            .login-form-2 h3{
+                text-align: center;
+                margin-bottom:12%;
+                color: #fff;
             }
 
-            .price {
-                color: grey;
-                font-size: 22px;
-            }
-
-            .card button {
+            .btnSubmit{
+                font-weight: 600;
+                width: 45%;
+                color: #282726;
+                background-color: grey;
                 border: none;
-                outline: 0;
-                padding: 12px;
-                color: #cc0000,;
-                background-color: #A4A4A4;
-                text-align: center;
+                border-radius: 1.5rem;
+                padding:2%;
+                font-size: 24px;
+            }
+
+
+
+            body {font-family: Arial, Helvetica, sans-serif;}
+
+            /* Full-width input fields */
+            input[type=text], input[type=password] {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+
+            /* Set a style for all buttons */
+            button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
                 cursor: pointer;
                 width: 100%;
-                font-size: 18px;
-                font-weight: bold;
-                font-family: Cursive;
-                font-style :LucidaHandwriting
             }
 
-            .card button:hover {
-                opacity: 0.7;
+            button:hover {
+                opacity: 0.8;
             }
-        </style>
+
+            /* Extra styles for the cancel button */
+            .cancelbtn {
+                width: auto;
+                padding: 10px 18px;
+                background-color: #f44336;
+            }
+
+            /* Center the image and position the close button */
+            .imgcontainer {
+                text-align: center;
+                margin: 24px 0 12px 0;
+                position: relative;
+            }
+
+            img.avatar {
+                width: 40%;
+                border-radius: 50%;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            span.psw {
+                float: right;
+                padding-top: 16px;
+            }
+
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                padding-top: 60px;
+            }
+
+            /* Modal Content/Box */
+            .modal-content {
+                background-color: #fefefe;
+                margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+                border: 1px solid #888;
+                width: 80%; /* Could be more or less, depending on screen size */
+            }
+
+            /* The Close Button (x) */
+            .close {
+                position: absolute;
+                right: 25px;
+                top: 0;
+                color: #000;
+                font-size: 35px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: red;
+                cursor: pointer;
+            }
+
+            /* Add Zoom Animation */
+            .animate {
+                -webkit-animation: animatezoom 0.6s;
+                animation: animatezoom 0.6s
+            }
+
+            @-webkit-keyframes animatezoom {
+                from {-webkit-transform: scale(0)} 
+                to {-webkit-transform: scale(1)}
+            }
+
+            @keyframes animatezoom {
+                from {transform: scale(0)} 
+                to {transform: scale(1)}
+            }
+
+            /* Change styles for span and cancel button on extra small screens */
+            @media screen and (max-width: 300px) {
+                span.psw {
+                    display: block;
+                    float: none;
+                }
+                .cancelbtn {
+                    width: 100%;
+                }
+            }
+
+
+
+        </style>	
+
+
+
+
+
 
     </head>
 
@@ -94,58 +284,153 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
+
+
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" style ="font-weight: bold; color: white">USER ID: <c:out value="${user.getUserId()}"></c:out></a>
-                        </li>
-                        <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" style ="font-weight: bold; color: white">Email: <c:out value="${user.getUserName()}"></c:out></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="Logout" style ="font-weight: bold; color: white">Logout</a>
-                        </li>
+                            <a class="nav-link js-scroll-trigger" style="font-weight: bold; color: white">Email: <c:out value="${user.getUserName()}"></c:out></a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger" href="logout"style ="font-weight: bold; color: white">LogOut</a>
+                            </li>
 
 
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-
-
-        <br>
-        <br>
-        <br>
-        <br>
-
-
-        <div class="container"> 
-            <div class="row"> 
-                <div class="col-lg-6 mb-4"> 
-                    <div class="card">
-                        <img src="https://novosolutions.com/wp-content/uploads/2016/08/am-better-organization-control.jpg" alt="Denim Jeans" style="width:300px;height:300px">
-                        <p style="font-color : black ; font-weight: bold ">Using the below button you can see the assets which is allocated to you.</p>
-                        <p><button>My Asset</button></p>
+                        </ul>
                     </div>
                 </div>
+            </nav>
 
-                <div class="col-lg-6 mb-4"> 
-                    <div class="card">
-                        <img src="https://revisionprocess.com/wp-content/uploads/2015/10/problem-solution2.jpg" alt="Denim Jeans" style="width:300px;height:300px">
-                        <p style="font-color : black ; font-weight: bold ">Using the below button you can see generate request for your assets.</p>
-                        <p><button onclick="window.location.href='RaiseRequest.jsp'">Raise Request</button></p>
+
+            <br>
+
+
+
+
+            <div class="container-fluid login-container" style=" ">
+                <div class="row">
+
+
+
+                    <div class="col-md-4 login-form-1">
+                        <h3 style="font-weight: bold ;font-size: 30px; ">WELCOME !!!</h3>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" style="font-weight: bold; color: white">USER ID : <c:out value="${user.getUserId()}"></c:out></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" style="font-weight: bold; color: white">Email : <c:out value="${user.getUserName()}"></c:out></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" style="font-weight: bold; color: white">Department : <c:out value="${user.getDepartment()}"></c:out></a>
+                        </li>
+                        <br>
+                        <p style="font-color : blue ; font-weight: bold ;font-size: 22px; font-family: Cursive; font-style :LucidaHandwriting">Your asset is not working...</p>
+                        <p style="font-color : blue ; font-weight: bold ;font-size: 22px; font-family: Cursive; font-style :LucidaHandwriting ;">Click the below button. Raise request.</p>
+
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" onclick="document.getElementById('id01').style.display = 'block'" value="Raise Request" />
+                        </div>
+
+
                     </div>
+
+
+
+
+
+                    <div id="id01" class="modal">
+
+                        <form class="modal-content animate" action="" method="post">
+                            <div class="imgcontainer">
+                                <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>
+
+                            </div>
+
+                            <div class="container">
+                                <label for="uname"><b>User Id</b></label>
+                                <input type="text" placeholder="Enter UserId" name="uname" required>
+
+                                <label for="psw"><b>Model Id</b></label>
+                                <input type="password" placeholder="Enter Modelid" name="psw" required>
+
+                                <br> 
+                                <label class="radio-inline" style="color : black ; font-weight: bold">
+                                    <input  type="radio" name="optradio" style="color : white  "> Personal Asset
+                                </label>
+                                <label class="radio-inline" style="color : black ;font-weight: bold ">
+                                    <input  type="radio" name="optradio" style="color : white  "> Departmental Asset 
+                                </label>
+                                <br>
+                                <button type="submit" onclick="alert('Details submitted successfully.')">Submit</button>
+
+                            </div>
+
+
+                        </form>
+                    </div>
+
+
+
+
+                    <div class="col-md-8 login-form-2">
+
+                        <h3 style="font-weight: bold ;font-size: 30px; ">MY ASSETS :-</h3>
+
+                        <table id="sailorTable" class="table table-striped table-bordered" width="100%">
+                            <thead>
+
+                                <tr style="background-color: blue ;font-size: 22px">
+                                    <th scope="col">ModelNo</th>
+                                    <th scope="col">User Id</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Status</th>
+                                    <!--                    <th scope="col">info</th>-->
+                                </tr>
+                            </thead>
+
+
+                        <%                
+                            InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
+                            System.out.println(inputFile);
+
+                            Connection con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
+
+                            PreparedStatement ps = con.prepareStatement("SELECT modelNo,type,value,status FROM personalasset WHERE userID=");
+                            ResultSet rs = ps.executeQuery();
+                            while (rs.next()) {
+
+                        %>
+                        <tbody>
+                            <tr style="font-size: 22px">
+                                <td><%= rs.getInt("modelNo")%></td>
+                                <td><%= rs.getString("type")%></td>
+                                <td><%= rs.getString("value")%></td>
+                                <td><%= rs.getString("status")%></td>
+                            </tr>
+                            
+                            <%}
+
+                                con.close();
+                            %>
+                        </tbody>
+                    </table>
+
+
+
                 </div>
+
+
+
             </div>
-        </div>
+        </div>	
 
 
 
 
 
-        <br>
-        <br>
         <!-- Footer -->
-        <footer class="py-5 bg-dark">
+        <footer class="py-3 bg-dark fixed-bottom">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
             </div>
@@ -161,6 +446,21 @@
 
         <!-- Custom JavaScript for this theme -->
         <script src="js/scrolling-nav.js"></script>
+
+
+
+        <script>
+      // Get the modal
+                                                                  var modal = document.getElementById('id01');
+
+      // When the user clicks anywhere outside of the modal, close it
+                                                                  window.onclick = function (event) {
+                                                                      if (event.target == modal) {
+                                                                          modal.style.display = "none";
+                                                                      }
+                                                                  }
+        </script>
+
 
     </body>
 

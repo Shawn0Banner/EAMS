@@ -27,8 +27,7 @@
                 font-color : white ; 
                 font-weight: bold ;
                 font-size: 18px; 
-                font-family: Cursive; 
-                font-style :LucidaHandwriting;
+                font-family: sans-serif; 
             }
 
             .login-container{
@@ -75,8 +74,7 @@
                 border: none;
                 border-radius: 1.5rem;
                 padding:2%;
-                font-family: Cursive; 
-                font-style :LucidaHandwriting
+                font-family: sans-serif;
             }
             .btnForgetPwd{
                 color: #fff;
@@ -112,13 +110,11 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="Home"style ="font-weight: bold; color: white">Home</a>
+                            <a class="nav-link js-scroll-trigger" href="UserHome.jsp" style ="font-weight: bold; color: white">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="Logout"style ="font-weight: bold; color: white">Logout</a>
+                            <a class="nav-link js-scroll-trigger" href="Logout" style ="font-weight: bold; color: white">Logout</a>
                         </li>
-
-
                     </ul>
                 </div>
             </div>
@@ -137,38 +133,41 @@
                     <p></p>
                     <br>
                     <br>
-                    <p style="font-color : black ; font-weight: bold ;font-size: 24px; font-family: Cursive; font-style :LucidaHandwriting">Your asset is not working...</p>
-                    <p style="font-color : black ; font-weight: bold ;font-size: 24px; font-family: Cursive; font-style :LucidaHandwriting ;text-align: center">Don't worry!!!</p>
-                    <p style="font-color : black ; font-weight: bold ;font-size: 24px; font-family: Cursive; font-style :LucidaHandwriting">Fill the right hand side form.</p>
+                    <p style="font-color : black ; font-weight: bold ;font-size: 24px; font-family: sans-serif; font-style :LucidaHandwriting">Your asset is not working...</p>
+                    <p style="font-color : black ; font-weight: bold ;font-size: 24px; font-family: sans-serif; font-style :LucidaHandwriting ;text-align: center">Don't worry!!!</p>
+                    <p style="font-color : black ; font-weight: bold ;font-size: 24px; font-family: sans-serif; font-style :LucidaHandwriting">Fill the right hand side form.</p>
 
                 </div>
 
                 <div class="col-md-6 login-form-1">
-                    <h3 style="font-weight: bold ;font-size: 30px; font-family: Cursive; font-style :LucidaHandwriting">REQUEST FOR REPAIR</h3>
+                    <h3 style="font-weight: bold; font-size: 30px; font-family: sans-serif;">REQUEST FOR REPAIR</h3>
 
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="User Id" value="" />
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Model Id *" value="" />
-                    </div>
+                    <form method="post" action="RaiseRequest">
+                        <div class="form-group">
+                            <input type="text" name="userEmail" class="form-control" placeholder="User Email" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="modelNo" class="form-control" placeholder="Model No *" value="" />
+                        </div>
+                        <br>
 
-                    <form>
+
 
                         <label class="radio-inline" style="color : white  ">
-                            <input  type="radio" name="optradio" style="color : white  "> Personal Asset 
+                            <input name="category" type="radio" style="color : white" value="personalAsset"> Personal Asset 
                         </label>
+                        <br>
                         <label class="radio-inline" style="color : white  ">
-                            <input  type="radio" name="optradio" style="color : white  "> Departmental Asset
+                            <input name="category" type="radio" style="color : white" value="departmentalAsset"> Departmental Asset
                         </label>
+
+                        <br>
+                        <br>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="SUBMIT"/>
+                        </div>
+
                     </form>
-                    <br>
-                    <br>
-                    <div class="form-group">
-                        <input type="submit" class="btnSubmit" value="SUBMIT" />
-
-                        <input type="submit" class="btnSubmit" value="CANCEL" />
-                    </div>
                 </div>
 
             </div>
@@ -179,7 +178,7 @@
 
 
         <!-- Footer -->
-        <footer class="py-5 bg-dark">
+        <footer class="py-3 bg-dark fixed-bottom">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
             </div>

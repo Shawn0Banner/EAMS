@@ -53,6 +53,14 @@
         <servlet-name>FetchData</servlet-name>
         <servlet-class>eams.servlet.FetchData</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RaiseRequest</servlet-name>
+        <servlet-class>eams.servlet.RaiseRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Track</servlet-name>
+        <servlet-class>eams.servlet.Track</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -92,6 +100,14 @@
     <servlet-mapping>
         <servlet-name>FetchData</servlet-name>
         <url-pattern>/FetchData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RaiseRequest</servlet-name>
+        <url-pattern>/RaiseRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Track</servlet-name>
+        <url-pattern>/Track</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
