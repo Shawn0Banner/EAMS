@@ -181,6 +181,30 @@
                 border-radius: 1.5rem;
                 padding:2%;
             }
+
+            .navbar .navbar-nav .nav-link {
+                color: #000000;
+                font-size: 1.1em;
+                position: relative;
+            }
+            .navbar .navbar-nav .nav-link:hover {
+                color: #000000;
+            }
+            .navbar .navbar-nav .nav-link::after {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                background-color: #000000;
+                color: transparent;
+                width: 0%;
+                content: '.';
+                height: 3px;
+            }
+            .navbar .navbar-nav .nav-link:hover::after {
+                width: 100%;
+            }
         </style>
 
     </head>
@@ -201,11 +225,11 @@
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white"><strong>Home</strong></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#" style ="color: white">Repair</a>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="RepairAssets.jsp">Repair<span class="badge rounded-circle" style="background: red;color: white; width: 20px;">${counter}</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="Logout" style ="color: white">Logout</a>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="Logout">Logout<span class="sr-only">(current)</span></a>
                         </li>
                         <!--  <li class="nav-item">
                            <a class="nav-link js-scroll-trigger" href="#contact"style ="color: white">Contact</a>
@@ -214,9 +238,6 @@
                 </div>
             </div>
         </nav>
-
-
-
 
         <div class="login-reg-panel">
             <div class="login-info-box">
@@ -238,11 +259,7 @@
                     <h2>ADD ASSET</h2>
                     <form method="POST" action="AddAsset">
                         <input type="text" name="modelNo" class="form-control" placeholder="Model no." value="" />
-
-
                         <input type="text" name="type" class="form-control" placeholder="Type" value="" />
-
-
                         <select class="form-control form-control-lg" name="department">
                             <option class="hidden" selected="" disabled="">Please select department</option>
                             <option value="HR">HR</option>

@@ -61,6 +61,18 @@
         <servlet-name>Track</servlet-name>
         <servlet-class>eams.servlet.Track</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Repair</servlet-name>
+        <servlet-class>eams.servlet.Repair</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Return</servlet-name>
+        <servlet-class>eams.servlet.Return</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditAsset</servlet-name>
+        <servlet-class>eams.servlet.EditAsset</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -108,6 +120,18 @@
     <servlet-mapping>
         <servlet-name>Track</servlet-name>
         <url-pattern>/Track</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Repair</servlet-name>
+        <url-pattern>/Repair</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Return</servlet-name>
+        <url-pattern>/Return</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAsset</servlet-name>
+        <url-pattern>/EditAsset</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

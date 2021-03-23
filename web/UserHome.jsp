@@ -338,8 +338,8 @@
 
                                 <tr style="font-size: 22px">
                                     <th scope="col">ModelNo</th>
-                                    <th scope="col">User Id</th>
                                     <th scope="col">Type</th>
+                                    <th scope="col">Value</th>
                                     <th scope="col">Status</th>
                                     <!--                    <th scope="col">info</th>-->
                                 </tr>
@@ -402,5 +402,4 @@
                                     }
         </script>
     </body>
-
 </html>

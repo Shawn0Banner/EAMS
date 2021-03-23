@@ -64,7 +64,7 @@ public class Track extends HttpServlet {
                 ps.setString(1, department);
                 ResultSet totalAssetTable = ps.executeQuery();
 
-                //query to get the total active assets
+                //query to get the total active assets and defective assets
                 ps = conn.prepareStatement("select type as 'Asset Name', count(type) as 'Total Active Assets' from personalasset where status='ACTIVE' and department=? group by type");
                 ps.setString(1, department);
                 ResultSet activeAssets = ps.executeQuery();
@@ -77,12 +77,12 @@ public class Track extends HttpServlet {
             } else {    //departmental asset part
 
                 //query to get the full table
-                PreparedStatement ps = conn.prepareStatement("select * from personalasset where department=?");
+                PreparedStatement ps = conn.prepareStatement("select * from departmentalasset where department=?");
                 ps.setString(1, department);
                 ResultSet mainTable = ps.executeQuery();
 
                 //query to get the total no assets in each department
-                ps = conn.prepareStatement("select type as 'Asset Name', count(type) as 'Total' from personalasset where department=? group by type");
+                ps = conn.prepareStatement("select type as 'Asset Name', count(type) as 'Total' from departmentalasset where department=? group by type");
                 ps.setString(1, department);
                 ResultSet totalAssetTable = ps.executeQuery();
 
@@ -91,9 +91,14 @@ public class Track extends HttpServlet {
                 ps.setString(1, department);
                 ResultSet activeAssets = ps.executeQuery();
 
+                /*
+                    TEST
+                 */
+
                 request.setAttribute("mainTable", mainTable);
                 request.setAttribute("totalAssetTable", totalAssetTable);
                 request.setAttribute("activeAssets", activeAssets);
+
                 RequestDispatcher rd = request.getRequestDispatcher("DepartmentalAssetDisplay.jsp");
                 rd.forward(request, response);
             }

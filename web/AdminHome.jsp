@@ -162,13 +162,13 @@
                 </div>
                 <div class="col-md-6 login-form-2" id="change2">
                     <div class="photog" >
-                        <a href="EditAsset.jsp"><img src="https://www.forescout.com/wp-content/uploads/2019/12/forescout-asset-management-blog-image.jpg" alt=""  height="240" width="250"/></a>
+                        <a href="EditAsset"><img src="https://www.forescout.com/wp-content/uploads/2019/12/forescout-asset-management-blog-image.jpg" alt=""  height="240" width="250"/></a>
                     </div>
                     <div class="description">
                         <h5>Admin can edit asset</h5>
                     </div>
                     <div class="login-logo">
-                        <a href="EditAsset.jsp"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
+                        <a href="EditAsset"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
                     </div>
                     <h3>Edit Asset</h3>
                 </div>
