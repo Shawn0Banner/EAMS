@@ -101,7 +101,6 @@
             .description {
                 width:250px;
                 height:15%;
-                background:#cc0000;
                 margin-top:115%;
                 position: relative;
                 margin-left:-55px;
@@ -148,38 +147,29 @@
         <br>
         <div class="container login-container">
             <div class="row">
-                <div class="col-md-6 login-form-1">
+                <div class="col-md-6 login-form-1 rounded-circle">
                     <div class="photog" >
-                        <a href="FetchData"> <img src="https://www.forescout.com/wp-content/uploads/2019/06/asset-mgmt-post-1-image.jpg" alt=""  height="240" width="250"/> </a>
+                        <a href="FetchData"> <img class="rounded" src="https://www.forescout.com/wp-content/uploads/2019/06/asset-mgmt-post-1-image.jpg" height="150" width="155" alt="" style="margin-top: 70px; margin-left: 45px"/> </a>
                     </div>
-                    <div class="description">
-                        <h5>Admin can allocate asset</h5>
-                    </div>
-                    <div class="login-logo">
+                    <div class="login-logo description">
                         <a href="FetchData"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
                     </div>
                     <h3>Allocate Asset</h3>
                 </div>
-                <div class="col-md-6 login-form-2" id="change2">
+                <div class="col-md-6 login-form-2 rounded-circle" id="change2">
                     <div class="photog" >
-                        <a href="EditAsset"><img src="https://www.forescout.com/wp-content/uploads/2019/12/forescout-asset-management-blog-image.jpg" alt=""  height="240" width="250"/></a>
+                        <a href="EditAsset"><img class="rounded" src="https://www.forescout.com/wp-content/uploads/2019/12/forescout-asset-management-blog-image.jpg" alt=""  height="150" width="155" alt="" style="margin-top: 70px; margin-left: 45px""/></a>
                     </div>
-                    <div class="description">
-                        <h5>Admin can edit asset</h5>
-                    </div>
-                    <div class="login-logo">
+                    <div class="login-logo description">
                         <a href="EditAsset"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
                     </div>
                     <h3>Edit Asset</h3>
                 </div>
-                <div class="col-md-6 login-form-3" id="change">
+                <div class="col-md-6 login-form-3 rounded-circle" id="change">
                     <div class="photog" >
-                        <a href="TrackAsset.jsp"><img src="https://people-hunters.com/wp-content/uploads/2019/10/How-Does-An-Asset-Based-Loan-Work.jpg" alt=""  height="240" width="250"/></a>
+                        <a href="TrackAsset.jsp"><img class="rounded" src="https://people-hunters.com/wp-content/uploads/2019/10/How-Does-An-Asset-Based-Loan-Work.jpg" alt=""  height="150" width="155" alt="" style="margin-top: 70px; margin-left: 45px""/></a>
                     </div>
-                    <div class="description">
-                        <h5>Admin can track asset</h5>
-                    </div>
-                    <div class="login-logo">
+                    <div class="login-logo description">
                         <a href="TrackAsset.jsp"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
                     </div>
                     <h3>Track</h3>                    
