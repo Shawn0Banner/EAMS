@@ -68,7 +68,7 @@
 
             #sailorTable tr.header, #sailorTable tr:hover {
                 /* Add a grey background color to the table header and on hover */
-                background-color: #cc0000;
+                background-color: lightcoral;
                 color:white;
 
             }
@@ -85,7 +85,7 @@
 
             .login-container{
                 margin-top: 5%;
-                margin-bottom: 5%;
+                margin-bottom: 1%;
             }
             .login-logo{
                 position: relative;
@@ -101,7 +101,7 @@
             }
             .login-form-1{
                 padding: 9%;
-                background:#cc0000;
+                background:lightgreen;
                 box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
             }
             .login-form-1 h3{
@@ -110,13 +110,10 @@
                 color:#fff;
             }
             .login-form-2{
-                padding: 9%;
-                background: grey;
                 box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
             }
             .login-form-2 h3{
                 text-align: center;
-                margin-bottom:12%;
                 color: #fff;
             }
 
@@ -147,7 +144,6 @@
 
             /* Set a style for all buttons */
             button {
-                background-color: #4CAF50;
                 color: white;
                 padding: 14px 20px;
                 margin: 8px 0;
@@ -256,15 +252,8 @@
 
 
 
-        </style>	
-
-
-
-
-
-
+        </style>
     </head>
-
 
     <body id="page-top">
 
@@ -284,17 +273,13 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-
-
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" style="font-weight: bold; color: white">Email: <c:out value="${user.getUserName()}"></c:out></a>
+                            <a class="nav-link js-scroll-trigger" style="font-weight: bold; color: white">User Name: <c:out value="${user.getUserName()}"></c:out></a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" href="logout"style ="font-weight: bold; color: white">LogOut</a>
+                                <a class="nav-link js-scroll-trigger" href="Logout"style ="font-weight: bold; color: white">Logout</a>
                             </li>
-
-
                         </ul>
                     </div>
                 </div>
@@ -306,81 +291,52 @@
 
 
 
-            <div class="container-fluid login-container" style=" ">
+            <div class="container-fluid" style="margin-top: 5%">
                 <div class="row">
-
-
-
                     <div class="col-md-4 login-form-1">
-                        <h3 style="font-weight: bold ;font-size: 30px; ">WELCOME !!!</h3>
-
-
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" style="font-weight: bold; color: white">USER ID : <c:out value="${user.getUserId()}"></c:out></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" style="font-weight: bold; color: white">Email : <c:out value="${user.getUserName()}"></c:out></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" style="font-weight: bold; color: white">Department : <c:out value="${user.getDepartment()}"></c:out></a>
-                        </li>
+                        <h3>WELCOME</h3>
+                        <p class="rounded" style="font-weight: bold">User ID : <c:out value="${user.getUserId()}"></c:out></p>
+                    <p class="rounded" style="font-weight: bold">User Name : <c:out value="${user.getUserName()}"></c:out></p>
                         <br>
-                        <p style="font-color : blue ; font-weight: bold ;font-size: 22px; font-family: Cursive; font-style :LucidaHandwriting">Your asset is not working...</p>
-                        <p style="font-color : blue ; font-weight: bold ;font-size: 22px; font-family: Cursive; font-style :LucidaHandwriting ;">Click the below button. Raise request.</p>
-
                         <div class="form-group">
-                            <input type="submit" class="btnSubmit" onclick="document.getElementById('id01').style.display = 'block'" value="Raise Request" />
+                            <input type="submit" class="btn btn-light" onclick="document.getElementById('id01').style.display = 'block'" value="Raise Request" />
                         </div>
-
-
                     </div>
-
-
-
-
-
                     <div id="id01" class="modal">
-
-                        <form class="modal-content animate" action="" method="post">
+                        <form class="modal-content animate" action="RaiseRequest" method="post">
                             <div class="imgcontainer">
                                 <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>
 
                             </div>
 
-                            <div class="container">
+                            <div class="container-fluid">
                                 <label for="uname"><b>User Id</b></label>
-                                <input type="text" placeholder="Enter UserId" name="uname" required>
+                                <input type="text" placeholder="Enter Your Email ID" name="userEmail" required>
 
                                 <label for="psw"><b>Model Id</b></label>
-                                <input type="password" placeholder="Enter Modelid" name="psw" required>
+                                <input type="text" placeholder="Enter Model No" name="modelNo" required>
 
                                 <br> 
                                 <label class="radio-inline" style="color : black ; font-weight: bold">
-                                    <input  type="radio" name="optradio" style="color : white  "> Personal Asset
+                                    <input  type="radio" name="category" style="color : white  " value="personalasset"> Personal Asset
                                 </label>
                                 <label class="radio-inline" style="color : black ;font-weight: bold ">
-                                    <input  type="radio" name="optradio" style="color : white  "> Departmental Asset 
+                                    <input  type="radio" name="category" style="color : white  " vale="departmentalasset"> Departmental Asset 
                                 </label>
                                 <br>
-                                <button type="submit" onclick="alert('Details submitted successfully.')">Submit</button>
-
+                                <button class="btn btn-dark" type="submit" onclick="alert('Details submitted successfully.')">Raise Request</button>
                             </div>
-
-
                         </form>
                     </div>
-
-
-
 
                     <div class="col-md-8 login-form-2">
 
                         <h3 style="font-weight: bold ;font-size: 30px; ">MY ASSETS :-</h3>
 
-                        <table id="sailorTable" class="table table-striped table-bordered" width="100%">
+                        <table class="table table-striped table-bordered" width="100%">
                             <thead>
 
-                                <tr style="background-color: blue ;font-size: 22px">
+                                <tr style="font-size: 22px">
                                     <th scope="col">ModelNo</th>
                                     <th scope="col">User Id</th>
                                     <th scope="col">Type</th>
@@ -389,54 +345,42 @@
                                 </tr>
                             </thead>
 
-
-                        <%                
+                        <%
                             InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
                             System.out.println(inputFile);
 
                             Connection con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
 
-                            PreparedStatement ps = con.prepareStatement("SELECT modelNo,type,value,status FROM personalasset WHERE userID=");
+                            PreparedStatement ps = con.prepareStatement("SELECT modelNo,type,value,status FROM personalasset WHERE userID=?");
+                            ps.setInt(1, user.getUserId());
                             ResultSet rs = ps.executeQuery();
                             while (rs.next()) {
 
                         %>
-                        <tbody>
+                        <tbody id="sailorTable">
                             <tr style="font-size: 22px">
                                 <td><%= rs.getInt("modelNo")%></td>
                                 <td><%= rs.getString("type")%></td>
                                 <td><%= rs.getString("value")%></td>
                                 <td><%= rs.getString("status")%></td>
                             </tr>
-                            
+
                             <%}
 
                                 con.close();
                             %>
                         </tbody>
                     </table>
-
-
-
                 </div>
-
-
-
             </div>
         </div>	
 
-
-
-
-
-        <!-- Footer -->
-        <footer class="py-3 bg-dark fixed-bottom">
+        <footer class="py-3 bg-dark fixed-bottom" style="margin-top: 280px">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
             </div>
             <!-- /.container -->
         </footer>
-
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -446,22 +390,17 @@
 
         <!-- Custom JavaScript for this theme -->
         <script src="js/scrolling-nav.js"></script>
-
-
-
         <script>
-      // Get the modal
-                                                                  var modal = document.getElementById('id01');
+                                    // Get the modal
+                                    var modal = document.getElementById('id01');
 
-      // When the user clicks anywhere outside of the modal, close it
-                                                                  window.onclick = function (event) {
-                                                                      if (event.target == modal) {
-                                                                          modal.style.display = "none";
-                                                                      }
-                                                                  }
+                                    // When the user clicks anywhere outside of the modal, close it
+                                    window.onclick = function (event) {
+                                        if (event.target == modal) {
+                                            modal.style.display = "none";
+                                        }
+                                    }
         </script>
-
-
     </body>
 
 </html>

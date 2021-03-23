@@ -245,11 +245,11 @@
 
                         <select class="form-control form-control-lg" name="department">
                             <option class="hidden" selected="" disabled="">Please select department</option>
-                            <option>HR</option>
-                            <option>Accounts</option>
-                            <option>R & D</option>
-                            <option>IT</option>
-                            <option>Sales</option>
+                            <option value="HR">HR</option>
+                            <option value="Accounts">Accounts</option>
+                            <option value="R&D">R & D</option>
+                            <option value="IT">IT</option>
+                            <option value="Sales">Sales</option>
                         </select>
 
 

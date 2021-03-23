@@ -54,7 +54,7 @@ public class RaiseRequest extends HttpServlet {
             PreparedStatement ps = null;
             ResultSet rs = null;
 
-            if (category.equals("personalAsset")) {
+            if (category.equals("personalasset")) {
                 //for personal asset
                 /*
                     Check if the model no exists in the table
@@ -83,7 +83,8 @@ public class RaiseRequest extends HttpServlet {
                     System.out.println("ASSET NOT FOUND!");
                     out.println("<script>alert('ASSET NOT FOUND!'); window.location.href='UserHome.jsp';</script>");
                 }
-            } else {
+            } 
+            else {
                 //for departmental asset
                 /*
                     Check if the model no exists in the table
