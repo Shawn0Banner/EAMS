@@ -63,6 +63,31 @@
         </script>
 
         <style>
+
+            .navbar .navbar-nav .nav-link {
+                color: #000000;
+                font-size: 1.1em;
+                position: relative;
+            }
+            .navbar .navbar-nav .nav-link:hover {
+                color: #000000;
+            }
+            .navbar .navbar-nav .nav-link::after {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                background-color: #000000;
+                color: transparent;
+                width: 0%;
+                content: '.';
+                height: 3px;
+            }
+            .navbar .navbar-nav .nav-link:hover::after {
+                width: 100%;
+            }
+            
             #myInput {
                 background-image: url('/css/searchicon.png'); /* Add a search icon to input */
                 background-position: 10px 12px; /* Position the search icon */
@@ -76,7 +101,7 @@
 
             #sailorTable tr.header, #sailorTable tr:hover {
                 /* Add a grey background color to the table header and on hover */
-                background-color: #cc0000;
+                background-color: lightcoral;
                 color:white;
             }
         </style>

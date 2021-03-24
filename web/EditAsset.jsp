@@ -223,7 +223,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white"><strong>Home</strong></a>
+                            <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white">Home</a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="RepairAssets.jsp">Repair<span class="badge rounded-circle" style="background: red;color: white; width: 20px;">${counter}</span></a>

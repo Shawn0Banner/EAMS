@@ -78,6 +78,30 @@
                 background-color: lightcoral;
                 color:white;
             }
+
+            .navbar .navbar-nav .nav-link {
+                color: #000000;
+                font-size: 1.1em;
+                position: relative;
+            }
+            .navbar .navbar-nav .nav-link:hover {
+                color: #000000;
+            }
+            .navbar .navbar-nav .nav-link::after {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                background-color: #000000;
+                color: transparent;
+                width: 0%;
+                content: '.';
+                height: 3px;
+            }
+            .navbar .navbar-nav .nav-link:hover::after {
+                width: 100%;
+            }
         </style>
     </head>
 
@@ -96,7 +120,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#services" style ="color: white">Repair Log</a>
+                            <a class="nav-link js-scroll-trigger" href="RepairLog.jsp" style ="color: white">Repair Log</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white">Home</a>
@@ -159,7 +183,7 @@
                         con.close();
                     %>
 
-                    <%                
+                    <%
                         inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
                         System.out.println(inputFile);
 
@@ -199,11 +223,11 @@
             </table>
         </div>
 
-            <footer class="py-5 bg-dark fixed-bottom">
-                <div class="container">
-                    <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
-                </div>
-                <!-- /.container -->
-            </footer>
+        <footer class="py-5 bg-dark fixed-bottom">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
+            </div>
+            <!-- /.container -->
+        </footer>
     </body>
 </html>

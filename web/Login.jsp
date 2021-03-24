@@ -17,6 +17,30 @@
 
         <!-- Custom styles for this template -->
         <style>
+            .navbar .navbar-nav .nav-link {
+                color: #000000;
+                font-size: 1.1em;
+                position: relative;
+            }
+            .navbar .navbar-nav .nav-link:hover {
+                color: #000000;
+            }
+            .navbar .navbar-nav .nav-link::after {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                background-color: #000000;
+                color: transparent;
+                width: 0%;
+                content: '.';
+                height: 3px;
+            }
+            .navbar .navbar-nav .nav-link:hover::after {
+                width: 100%;
+            }
+            
             .login-container{
                 margin-top: 5%;
                 margin-bottom: 5%;
@@ -76,12 +100,12 @@
     </head>
 
     <body id="page-top">
-        
+
         <%
             String error = (String) request.getAttribute("error");
             System.out.println(error);
         %>
-        
+
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
             <div class="container">
