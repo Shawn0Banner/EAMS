@@ -87,7 +87,7 @@
             .navbar .navbar-nav .nav-link:hover::after {
                 width: 100%;
             }
-            
+
             #myInput {
                 background-image: url('/css/searchicon.png'); /* Add a search icon to input */
                 background-position: 10px 12px; /* Position the search icon */
@@ -145,50 +145,56 @@
                         <th scope="col">User Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Department</th>
+                        <th scope="col">Allocate/Deallocate</th>
+                        <th scope="col">Action</th>
 
                         <!--                    <th scope="col">info</th>-->
                     </tr>
                 </thead>
 
-
-                <%                
-                    InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
-                    System.out.println(inputFile);
-
-                    Connection con = null;
-
-                    con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
-
-                    PreparedStatement ps = con.prepareStatement("SELECT userId, userName, email, department FROM user WHERE type='USER'");
-                    ResultSet rs = ps.executeQuery();
-                    while (rs.next()) {
-
-                %>
                 <tbody id="sailorTable">
+                    <%
+                        InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
+                        System.out.println(inputFile);
+
+                        Connection con = null;
+
+                        con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
+
+                        PreparedStatement ps = con.prepareStatement("SELECT userId, userName, email, department FROM user WHERE type='USER'");
+                        ResultSet rs = ps.executeQuery();
+                        while (rs.next()) {
+
+                    %>
+
                     <tr>
                         <td><%= rs.getInt("userId")%></td>
                         <td><%= rs.getString("userName")%></td>
                         <td><%= rs.getString("email")%></td>
                         <td><%= rs.getString("department")%></td>
-
-
-                        <!--                <td><button class="info" onclick="openCat(event,)">i</button><td>-->
-
-
+                        <td><button type="button" class="btn btn-secondary" onclick="window.location.href = 'FetchData'">Allocate/Deallocate</button><td>
+                            <button type="button" class="btn btn-secondary" onclick="myFunc();window.location.href = 'RemoveUser?userId=<%= rs.getInt("userId")%>'">Remove</button>
                     </tr>
 
+                
 
 
+                <%}
 
-
-                    <%}
-
-                        //System.out.println("</table>");  
-                        //System.out.println("</html></body>");  
-                        con.close();
-                    %>
+                    //System.out.println("</table>");  
+                    //System.out.println("</html></body>");  
+                    con.close();
+                %>
                 </tbody>
             </table>
+                
+                
+                <script>
+                    function myFunc() {
+                        confirm("Press OK to confirm!");
+                    }
+                </script>
+
     </body>
     <footer class="py-3 bg-dark fixed-bottom" style="margin-top: 500px">
         <div class="container">

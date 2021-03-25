@@ -86,12 +86,12 @@
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <h2>About this page</h2>
-                        <p class="lead">This is a great place to talk about your webpage. This template is purposefully unstyled so you can use it as a boilerplate or starting point for you own landing page designs! This template features:</p>
+                        <p class="lead">Welcome to Enterprise Asset Management System! We help you manage your assets in just a few clicks. Our web site features:</p>
                         <ul>
-                            <li>Clickable nav links that smooth scroll to page sections</li>
-                            <li>Responsive behavior when clicking nav links perfect for a one page website</li>
-                            <li>Bootstrap's scrollspy feature which highlights which section of the page you're on in the navbar</li>
-                            <li>Minimal custom CSS so you are free to explore your own unique design options</li>
+                            <li>User friendly design</li>
+                            <li>Smooth dynamic contents</li>
+                            <li>Multiple features for both admin and users</li>
+                            <li>Soothing tabular display</li>
                         </ul>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <h2>Services we offer</h2>
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
+                        <p class="lead">We help you add and remove your assets, allocate and deallocate assets to users and keep track of your assets.</p>
                     </div>
                 </div>
             </div>
@@ -114,14 +114,14 @@
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <h2>Contact us</h2>
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor, provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae ipsa exercitationem, in, quo totam.</p>
+                        <p class="lead">You can contact us via our email address - Team3@exavalu.com</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Footer -->
-        <footer class="py-3 bg-dark fixed-bottom">
+        <footer class="py-5 bg-dark">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
             </div>
