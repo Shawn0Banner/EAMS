@@ -3,17 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/PersonalAssetDisplay.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/EditAsset.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/DepartmentalAssetDisplay.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/TrackAsset.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/RepairAssets.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/index.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/RepairLog.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/AllocateAsset.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/AdminHome.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/Login.jsp</file>
-            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/Users.jsp</file>
+            <file>file:/D:/EAMS/web/vendor/bootstrap/css/bootstrap.css</file>
         </group>
     </open-files>
 </project-private>
