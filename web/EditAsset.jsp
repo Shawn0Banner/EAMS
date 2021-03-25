@@ -251,6 +251,34 @@
                     return true;
                 }
             }
+            
+            function checkRemoveForm(form){
+                modelNo = form.modelNo.value;
+                type = form.type.value;
+                radio1 = document.getElementById('removeRadio');
+                radio2 = document.getElementById('removeRadio1');
+                var form1 = document.getElementById('removeForm');
+                
+                if(modelNo==''){
+                    alert('Please enter a model no');
+                    return false;
+                } else if(isNaN(modelNo)){
+                    alert('Model No should be a number');
+                    return false;
+                } else if(type==''){
+                    alert('Please enter a type');
+                    return false;
+                } else if(!isNaN(type)){
+                    alert('Type should be a string');
+                    return false;
+                } else if(!radio1.checked && !radio2.checked){
+                    alert('Please select a category');
+                    return false;
+                } else{
+                    form1.setAttribute('action', 'RemoveAsset');
+                    return true;
+                }
+            }
         </script>
 
     </head>
@@ -330,13 +358,12 @@
                 </div>
                 <div class="register-show">
                     <h2>REMOVE ASSET</h2>
+                    <!-- remove asset form-->
+                    <form method="POST" id="removeForm" onsubmit="return checkRemoveForm(this)">
 
-                    <form method="POST" action="RemoveAsset">
+                        <input type="text" name="modelNo" class="form-control" placeholder="Enter Model no." value="" />
 
-                        <input type="text" name="modelNo" class="form-control" placeholder="Model no." value="" />
-
-
-                        <input type="text" name="type" class="form-control" placeholder="Type" value="" />
+                        <input type="text" name="type" class="form-control" placeholder="Enter Type" value="" />
 
                         <div class="custom-control custom-radio custom-control-inline">
                             <input name="category" type="radio" class="custom-control-input" id="removeRadio" value="personalAsset">
@@ -348,7 +375,7 @@
                         </div>
                         <br>
                         <br>
-                        <input type="button" value="Remove" onclick="form.submit()">
+                        <input type="submit" value="Remove" class="btn btn-dark">
 
                     </form>
 

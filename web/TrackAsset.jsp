@@ -201,6 +201,25 @@
                 width: 100%;
             }
         </style>
+        
+        <script>
+            function checkTrackForm(form){
+                department = form.department.value;
+                radio1 = document.getElementById('customRadio1');
+                radio2 = document.getElementById('customRadio2');
+                form = document.getElementById('trackForm');
+                
+                if(department=='default-department'){
+                    alert('Please select a department');
+                    return false;
+                } else if( !radio1.checked && !radio2.checked ){
+                    alert('Please select a category');
+                    return false;
+                } else {
+                    form.setAttribute('action', 'Track');
+                }
+            }
+        </script>
 
     </head>
 
@@ -258,16 +277,15 @@
                 <div class="login-show">
                     <h2>Track Asset Details</h2>
                     <br><br>
-                    <form method="post" action="Track">
+                    <form method="post" id="trackForm" onsubmit="return checkTrackForm(this)">
                         <select class="form-control form-control-lg" name="department">
-                            <option class="hidden" selected="" disabled="">Please select department</option>
+                            <option class="hidden" selected="" disabled="" value="default-department">Please select department</option>
                             <option value="HR">HR</option>
                             <option value="Accounts">Accounts</option>
                             <option value="R&D">R & D</option>
                             <option value="IT">IT</option>
                             <option value="Sales">Sales</option>
                         </select>
-
                         <br><br>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input name="category" type="radio" class="custom-control-input" id="customRadio1" name="example" value="personalasset">
@@ -278,7 +296,7 @@
                             <label class="custom-control-label" for="customRadio2">Departmental Asset</label>
                         </div>
                         <br><br>                            
-                        <input type="button" value="View" onclick="form.submit()">
+                        <input type="submit" value="View" class="btn btn-dark">
                     </form>                    
                 </div>
                 <div class="register-show">

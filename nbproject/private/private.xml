@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/EditAsset.jsp</file>
             <file>file:/D:/Documents/NetBeansProjects/EAMS/web/WEB-INF/db_params.properties</file>
             <file>file:/D:/Documents/NetBeansProjects/EAMS/web/Register.jsp</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/TrackAsset.jsp</file>
             <file>file:/D:/Documents/NetBeansProjects/EAMS/web/AllocateAsset.jsp</file>
+            <file>file:/D:/Documents/NetBeansProjects/EAMS/web/AdminHome.jsp</file>
         </group>
     </open-files>
 </project-private>

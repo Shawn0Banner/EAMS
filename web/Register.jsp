@@ -107,44 +107,39 @@
         // Function to check Whether both passwords 
         // is same or not. 
         function checkPassword(form) {
-            password1 = form.password1.value;
-            password2 = form.password2.value;
             email = form.email.value;
-
-
-            var form1 = document.querySelector("form");
-
-            if (email == '') {
-                alert("Please enter email");
+            userName = form.userName.value;
+            department = form.department.value;
+            pass1 = form.password1.value;
+            pass2 = form.password2.value;
+            form1 = document.getElementById('registerForm');
+            
+            if(email == ''){
+                alert('Please enter your email');
                 return false;
-            }
-
-            if (password1.length < 6) {
-                alert("Password should be 6 characters long");
+            } else if(!isNaN(email)){
+                alert('Email should be a text');
                 return false;
-            }
-
-            // If password not entered 
-            if (password1 == '') {
-                alert("Please enter Password");
+            } else if(userName == ''){
+                alert('Please enter your name');
                 return false;
-            }
-
-            // If confirm password not entered 
-            else if (password2 == '') {
-                alert("Please enter confirm password");
+            } else if(department == 'default-department'){
+                alert('Please select your department');
                 return false;
-            }
-
-            // If Not same return False.     
-            else if (password1 != password2) {
-                alert("\nPassword did not match: Please try again...");
+            } else if(pass1 == ''){
+                alert('Please enter a password');
                 return false;
-            }
-
-            // If same return True. 
-            else {
-                form1.setAttribute("action", "Register");
+            } else if(pass1.length < 6){
+                alert('Password should be 6 characters long');
+                return false;
+            } else if(pass2 == ''){
+                alert('Please enter your password again');
+                return false;
+            } else if(pass1 != pass2){
+                alert('Password & Confirm Password DO NOT MATCH');
+                return false;
+            } else{
+                form1.setAttribute('action', 'Register');
                 return true;
             }
         }
@@ -182,29 +177,26 @@
 
                 </div>
                 <div class="col-md-9 register-right">
-                    <form method="POST" onsubmit="return checkPassword(this)">
+                    <form method="POST" id="registerForm" onsubmit="return checkPassword(this)">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <h3 class="register-heading">Registration Form</h3>
                                 <div class="row register-form">
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control" placeholder="Enter Email" value="">
-                                        </div>
-                                        
+                                        </div>                                        
                                         <div class="form-group">
                                             <input type="text" name="userName" class="form-control" placeholder="Enter User Name" value="">
                                         </div>
-
                                         <div class="form-group">
                                             <select class="form-control" name="department">
-                                                <option class="hidden" selected="" disabled="">Please select your department</option>
-                                                <option>HR</option>
-                                                <option>Accounts</option>
-                                                <option>R&D</option>
-                                                <option>IT</option>
-                                                <option>Sales</option>
+                                                <option class="hidden" selected="" disabled="" value="default-department">Please select your department</option>
+                                                <option value="HR">HR</option>
+                                                <option value="Accounts">Accounts</option>
+                                                <option vale="R&D">R&D</option>
+                                                <option value="IT">IT</option>
+                                                <option value="Sales">Sales</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -213,8 +205,6 @@
                                         <div class="form-group">
                                             <input type="password" name="password2" class="form-control" placeholder="Confirm Password" value="">
                                         </div>
-
-
                                         <input type="submit" class="btnRegister" value="Register">
                                     </div>
                                 </div>
