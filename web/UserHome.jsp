@@ -249,12 +249,12 @@
             }
 
             .navbar .navbar-nav .nav-link {
-                color: #000000;
+                color: #cc0000;
                 font-size: 1.1em;
                 position: relative;
             }
             .navbar .navbar-nav .nav-link:hover {
-                color: #000000;
+                color: #cc0000;
             }
             .navbar .navbar-nav .nav-link::after {
                 position: absolute;
@@ -262,7 +262,7 @@
                 left: 0;
                 right: 0;
                 margin: auto;
-                background-color: #000000;
+                background-color: #cc0000;
                 color: transparent;
                 width: 0%;
                 content: '.';

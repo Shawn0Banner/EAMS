@@ -22,12 +22,12 @@
 
         <style type="text/css">
             .navbar .navbar-nav .nav-link {
-                color: #000000;
+                color: #cc0000;
                 font-size: 1.1em;
                 position: relative;
             }
             .navbar .navbar-nav .nav-link:hover {
-                color: #000000;
+                color: #cc0000;
             }
             .navbar .navbar-nav .nav-link::after {
                 position: absolute;
@@ -35,7 +35,7 @@
                 left: 0;
                 right: 0;
                 margin: auto;
-                background-color: #000000;
+                background-color: #cc0000;
                 color: transparent;
                 width: 0%;
                 content: '.';
@@ -44,7 +44,7 @@
             .navbar .navbar-nav .nav-link:hover::after {
                 width: 100%;
             }
-            
+
             @import url('https://fonts.googleapis.com/css?family=Mukta');
             body{
                 font-family: 'Mukta', sans-serif;
@@ -200,6 +200,61 @@
             }
         </style>
 
+        <script>
+            function checkAllocateForm(form) {
+                email = form.userEmail.value;
+                var chks = container1.getElementsByTagName("INPUT");
+                var form1 = document.querySelector("form");
+
+                checked = 0;
+
+                //Loop and count the number of checked CheckBoxes.
+                for (var i = 0; i < chks.length; i++) {
+                    if (chks[i].checked) {
+                        checked++;
+                    }
+                }
+
+                if (email == '') {
+                    alert('Enter email');
+                    return false;
+                } else if (checked <= 0) {
+                    alert('Atleast select one asset');
+                    return false;
+                } else {
+                    form1.setAttribute("action", "AllocateAsset");
+                    return true;
+                }
+            }
+
+            function checkDeAllocateForm(form) {
+                email = form.userEmail.value;
+                var chks = container2.getElementsByTagName("INPUT");
+                var form1 = document.getElementById('deAllocateForm')
+
+                checked = 0;
+
+                //Loop and count the number of checked CheckBoxes.
+                for (var i = 0; i < chks.length; i++) {
+                    if (chks[i].checked) {
+                        checked++;
+                    }
+                }
+
+                if (email == '') {
+                    alert('Enter email');
+                    return false;
+                } else if (checked <= 0) {
+                    alert('Atleast select one asset');
+                    return false;
+                } else {
+                    form1.setAttribute("action", "DeAllocate");
+                    return true;
+                }
+            }
+        </script>
+
+
     </head>
 
     <%
@@ -209,7 +264,8 @@
 
     %>
 
-    <body onload="myFunc(); myFunc2();">
+    <body onload="myFunc();
+            myFunc2();">
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
             <div class="container">
@@ -240,10 +296,6 @@
                 </div>
             </div>
         </nav>
-
-
-
-
         <div class="login-reg-panel">
             <div class="login-info-box">
                 <h2>Want to allocate asset?</h2>
@@ -262,34 +314,25 @@
             <div class="white-panel">
                 <div class="login-show">
                     <h2>ALLOCATE ASSET </h2>
-                    <form method="post" action="AllocateAsset">
+                    <form method="post" onsubmit="return checkAllocateForm(this)">
                         <input type="text" name="userEmail" class="form-control" placeholder="Enter User Email" value="" />
-
                         <p id="container1" class="form-control">
-
+                            <!-- new check boxes-->
                         </p>
-
                         <br>                            
-                        <input type="button" value="Submit" onclick="form.submit()">
+                        <input type="submit" value="Submit" class="btn btn-dark">
                     </form>
                 </div>
                 <div class="register-show">
-                    <h2>DE-ALLOCATE ASSET ASSET</h2>
-
-                    <form method="post" action="DeAllocate">
-
+                    <h2>DE-ALLOCATE ASSET</h2>
+                    <form id="deAllocateForm" method="post" onsubmit="return checkDeAllocateForm(this)">
                         <input type="text" name="userEmail" class="form-control" placeholder="Enter User Email" value="" />
-                        <br>
                         <p id="container2" class="form-control">
+                            
                         </p>
                         <br>
-                        <input type="button" value="Submit" onclick="form.submit()">
-
+                        <input type="submit" value="Submit" class="btn btn-dark">
                     </form>
-
-
-
-
                 </div>
             </div>
         </div>
