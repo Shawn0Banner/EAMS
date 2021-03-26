@@ -192,12 +192,12 @@
             }
 
             .navbar .navbar-nav .nav-link {
-                color: #000000;
+                color: #cc0000;
                 font-size: 1.1em;
                 position: relative;
             }
             .navbar .navbar-nav .nav-link:hover {
-                color: #000000;
+                color: #cc0000;
             }
             .navbar .navbar-nav .nav-link::after {
                 position: absolute;
@@ -205,7 +205,7 @@
                 left: 0;
                 right: 0;
                 margin: auto;
-                background-color: #000000;
+                background-color: #cc0000;
                 color: transparent;
                 width: 0%;
                 content: '.';
@@ -215,6 +215,80 @@
                 width: 100%;
             }
         </style>
+
+        <script>
+            function checkAddForm(form) {
+                modelNo = form.modelNo.value;
+                type = form.type.value;
+                department = form.department.value;
+                value = document.getElementById('value').value;
+                radio1 = document.getElementById('addRadio');
+                radio2 = document.getElementById('addRadio1');
+
+                var form1 = document.getElementById('addAssetForm');
+
+                if (modelNo == '') {
+                    alert('Enter a model no');
+                    return false;
+                } else if(isNaN(modelNo)){
+                    alert('Model No should be a number');
+                    return false;
+                }
+                else if (type == '') {
+                    alert('Please enter a type');
+                    return false;
+                } else if (!isNaN(type)) {
+                    alert('Type should be a String');
+                    return false;
+                } else if (isNaN(modelNo)) {
+                    alert('Model No should be a number');
+                    return false;
+                } else if (department == 'default-department') {
+                    alert('Please select one department');
+                    return false;
+                } else if(value==''){
+                    alert('Please enter a value');
+                    return false;
+                } else if(isNaN(value)){
+                    alert('Value should be a number');
+                    return false;
+                } else if(!radio1.checked && !radio2.checked){
+                    alert('Please select a asset categroy');
+                    return false;
+                } else{
+                    form1.setAttribute('action', 'AddAsset');
+                    return true;
+                }
+            }
+            
+            function checkRemoveForm(form){
+                modelNo = form.modelNo.value;
+                type = form.type.value;
+                radio1 = document.getElementById('removeRadio');
+                radio2 = document.getElementById('removeRadio1');
+                var form1 = document.getElementById('removeForm');
+                
+                if(modelNo==''){
+                    alert('Please enter a model no');
+                    return false;
+                } else if(isNaN(modelNo)){
+                    alert('Model No should be a number');
+                    return false;
+                } else if(type==''){
+                    alert('Please enter a type');
+                    return false;
+                } else if(!isNaN(type)){
+                    alert('Type should be a string');
+                    return false;
+                } else if(!radio1.checked && !radio2.checked){
+                    alert('Please select a category');
+                    return false;
+                } else{
+                    form1.setAttribute('action', 'RemoveAsset');
+                    return true;
+                }
+            }
+        </script>
 
     </head>
 
@@ -266,22 +340,18 @@
             <div class="white-panel">
                 <div class="login-show">
                     <h2>ADD ASSET</h2>
-                    <form method="POST" action="AddAsset">
-                        <input type="text" name="modelNo" class="form-control" placeholder="Model no." value="" />
-                        <input type="text" name="type" class="form-control" placeholder="Type" value="" />
+                    <form id="addAssetForm" method="POST" onsubmit="return checkAddForm(this)">
+                        <input type="text" name="modelNo" class="form-control" placeholder="Enter Model no." value="" />
+                        <input type="text" name="type" class="form-control" placeholder="Enter Type" value="" />
                         <select class="form-control form-control-lg" name="department">
-                            <option class="hidden" selected="" disabled="">Please select department</option>
+                            <option class="hidden" selected="" disabled="" value="default-department">Please select department</option>
                             <option value="HR">HR</option>
                             <option value="Accounts">Accounts</option>
                             <option value="R&D">R & D</option>
                             <option value="IT">IT</option>
                             <option value="Sales">Sales</option>
                         </select>
-
-
-                        <input type="text" name="value" class="form-control" placeholder="Value" value="" />
-
-
+                        <input type="text" id="value" name="value" class="form-control" placeholder="Value" value="" />
                         <div class="custom-control custom-radio custom-control-inline">
                             <input name="category" type="radio" class="custom-control-input" id="addRadio" value="personalAsset">
                             <label class="custom-control-label" for="addRadio">Personal Asset</label>
@@ -290,19 +360,19 @@
                             <input name="category" type="radio" class="custom-control-input" id="addRadio1" value="departmentalAsset">
                             <label class="custom-control-label" for="addRadio1">Departmental Asset</label>
                         </div>
-                        <br>                            
-                        <input type="button" value="Add" onclick="form.submit()">
+                        <br>   
+                        <br>
+                        <input type="submit" value="Add" class="btn btn-dark">
                     </form>
                 </div>
                 <div class="register-show">
                     <h2>REMOVE ASSET</h2>
+                    <!-- remove asset form-->
+                    <form method="POST" id="removeForm" onsubmit="return checkRemoveForm(this)">
 
-                    <form method="POST" action="RemoveAsset">
+                        <input type="text" name="modelNo" class="form-control" placeholder="Enter Model no." value="" />
 
-                        <input type="text" name="modelNo" class="form-control" placeholder="Model no." value="" />
-
-
-                        <input type="text" name="type" class="form-control" placeholder="Type" value="" />
+                        <input type="text" name="type" class="form-control" placeholder="Enter Type" value="" />
 
                         <div class="custom-control custom-radio custom-control-inline">
                             <input name="category" type="radio" class="custom-control-input" id="removeRadio" value="personalAsset">
@@ -314,7 +384,7 @@
                         </div>
                         <br>
                         <br>
-                        <input type="button" value="Remove" onclick="form.submit()">
+                        <input type="submit" value="Remove" class="btn btn-dark">
 
                     </form>
 

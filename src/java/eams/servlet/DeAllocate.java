@@ -82,7 +82,7 @@ public class DeAllocate extends HttpServlet {
             }
             else{
                 System.out.println("USER NOT FOUND");
-                out.println("<script>alert('USER NOT FOUND'); window.href.location='AdminHome.jsp';</script>");
+                out.println("<script>alert('USER NOT FOUND'); window.location.href='AdminHome.jsp';</script>");
             }
             
         } catch (Exception e) {
