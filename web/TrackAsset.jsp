@@ -304,7 +304,7 @@
                             <label class="custom-control-label" for="customRadio2">Departmental Asset</label>
                         </div>
                         <br><br>                            
-                        <input type="submit" value="View" class="btn btn-dark">
+                        <input type="submit" value="View" class="btn btn-dark" style="float:right;padding-right: 20px;padding-left: 20px">
                     </form>                    
                 </div>
                 <div class="register-show">

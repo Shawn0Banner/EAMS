@@ -361,8 +361,8 @@
                             <label class="custom-control-label" for="addRadio1">Departmental Asset</label>
                         </div>
                         <br>   
-                        <br>
-                        <input type="submit" value="Submit" class="btn btn-dark">
+                        
+                        <input type="submit" value="Submit" class="btn btn-dark" style="float:right;padding-right: 20px;padding-left: 20px">
                     </form>
                 </div>
                 <div class="register-show">
@@ -384,7 +384,7 @@
                         </div>
                         <br>
                         <br>
-                        <input type="submit" value="Submit" class="btn btn-dark">
+                        <input type="submit" value="Submit" class="btn btn-dark" style="float:right;padding-right: 20px;padding-left: 20px">
 
                     </form>
 

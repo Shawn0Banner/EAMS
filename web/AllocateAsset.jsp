@@ -328,7 +328,7 @@
                             <!-- new check boxes-->
                         </p>
                         <br>                            
-                        <input type="submit" value="Submit" class="btn btn-dark">
+                        <input type="submit" value="Submit" class="btn btn-dark" style="float:right;padding-right: 20px;padding-left: 20px">
                     </form>
                 </div>
                 <div class="register-show">
@@ -339,7 +339,7 @@
 
                         </p>
                         <br>
-                        <input type="submit" value="Submit" class="btn btn-dark">
+                        <input type="submit" value="Submit" class="btn btn-dark" style="float:right;padding-right: 20px;padding-left: 20px">
                     </form>
                 </div>
             </div>
