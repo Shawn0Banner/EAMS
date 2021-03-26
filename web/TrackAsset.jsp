@@ -36,8 +36,7 @@
             body{
                 font-family: 'Mukta', sans-serif;
                 height:100vh;
-                min-height:550px;
-                background-image: url(https://source.unsplash.com/1400x800/?technology,computer);
+                min-height:550px;                
                 background-repeat: no-repeat;
                 background-size:cover;
                 background-position:center;

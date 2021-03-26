@@ -6,11 +6,11 @@
 <html lang="en">
 
     <head>
-<script type="text/javascript">
-            window.history.forward();
-            function noBack()
-            {
-                window.history.forward();
+        <script type="text/javascript">
+                    window.history.forward();
+                    function noBack()
+                    {
+                        window.history.forward();
             }
         </script>
 

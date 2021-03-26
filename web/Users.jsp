@@ -48,27 +48,27 @@
 
 
         <script>
-            function myFunction() {
-                // Declare variables
-                var input, filter, table, tr, td, i, txtValue;
-                input = document.getElementById("myInput");
-                filter = input.value.toUpperCase();
-                table = document.getElementById("sailorTable");
-                tr = table.getElementsByTagName("tr");
+        function myFunction() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("sailorTable");
+            tr = table.getElementsByTagName("tr");
 
-                // Loop through all table rows, and hide those who don't match the search query
-                for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[1];
-                    if (td) {
-                        txtValue = td.textContent || td.innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                        } else {
-                            tr[i].style.display = "none";
-                        }
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
                     }
                 }
             }
+        }
         </script>
 
         <style>
@@ -116,100 +116,102 @@
         </style>
     </head>
 
-    <body id="page-top">
+<body id="page-top">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand" href="index.jsp">
-                    <img src="https://www.exavalu.com/wp-content/uploads/2019/05/exavaluLogo.png" alt="" width="150" height="50" class="d-inline-block align-mid">
-                    ASSET MANAGEMENT
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="Logout" style ="color: white">Logout</a>
-                        </li>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.jsp">
+                <img src="https://www.exavalu.com/wp-content/uploads/2019/05/exavaluLogo.png" alt="" width="150" height="50" class="d-inline-block align-mid">
+                ASSET MANAGEMENT
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="AdminHome.jsp" style ="color: white">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="Logout" style ="color: white">Logout</a>
+                    </li>
 
-                    </ul>
-                </div>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <div class="table-responsive" id="sailorTableArea">
-            <br><br>
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by name..">
+    <div class="table-responsive" id="sailorTableArea">
+        <br><br>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by name..">
 
-            <table class="table table-striped table-bordered" width="100%">
-                <thead>
+        <table class="table table-striped table-bordered" width="100%">
+            <thead>
 
-                    <tr>
-                        <th scope="col">User Id</th>
-                        <th scope="col">User Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Department</th>
-                        <th scope="col">Allocate/Deallocate</th>
-                        <th scope="col">Action</th>
+                <tr>
+                    <th scope="col">User Id</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Allocate/Deallocate</th>
+                    <th scope="col">Action</th>
 
-                        <!--                    <th scope="col">info</th>-->
-                    </tr>
-                </thead>
+                    <!--                    <th scope="col">info</th>-->
+                </tr>
+            </thead>
 
-                <tbody id="sailorTable">
-                    <%
-                        InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
-                        System.out.println(inputFile);
+            <tbody id="sailorTable">
+                <%
+                    InputStream inputFile = getServletContext().getResourceAsStream("/WEB-INF/db_params.properties");
+                    System.out.println(inputFile);
 
-                        Connection con = null;
+                    Connection con = null;
 
-                        con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
+                    con = ConnectionProviderToDB.getConnectionObject().getConnection(inputFile);
 
-                        PreparedStatement ps = con.prepareStatement("SELECT userId, userName, email, department FROM user WHERE type='USER'");
-                        ResultSet rs = ps.executeQuery();
-                        while (rs.next()) {
+                    PreparedStatement ps = con.prepareStatement("SELECT userId, userName, email, department FROM user WHERE type='USER'");
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
 
-                    %>
-
-                    <tr>
-                        <td><%= rs.getInt("userId")%></td>
-                        <td><%= rs.getString("userName")%></td>
-                        <td><%= rs.getString("email")%></td>
-                        <td><%= rs.getString("department")%></td>
-                        <td><button type="button" class="btn btn-secondary" onclick="window.location.href = 'FetchData'">Allocate/Deallocate</button><td>
-                            <button type="button" class="btn btn-secondary" onclick="myFunc();window.location.href = 'RemoveUser?userId=<%= rs.getInt("userId")%>'">Remove</button>
-                    </tr>
-
-                
-
-
-                <%}
-
-                    //System.out.println("</table>");  
-                    //System.out.println("</html></body>");  
-                    con.close();
                 %>
-                </tbody>
-            </table>
-                
-                
+
+                <tr>
+                    <td><%= rs.getInt("userId")%></td>
+                    <td><%= rs.getString("userName")%></td>
+                    <td><%= rs.getString("email")%></td>
+                    <td><%= rs.getString("department")%></td>
+                    <td><button type="button" class="btn btn-secondary" onclick="window.location.href = 'FetchData'">Allocate/Deallocate</button></td>
+                    <td><button type="button" class="btn btn-secondary" onclick="myFunc();">Remove</button></td>
+                </tr>
+
                 <script>
                     function myFunc() {
-                        confirm("Press OK to confirm!");
+                        var con = confirm("Press OK to confirm!");
+                        if (con == true) {
+                            window.location.href = 'RemoveUser?userId=<%= rs.getInt("userId")%>';
+                        } else {
+                            window.location.href = 'Users.jsp';
+                        }
                     }
                 </script>
 
-    </body>
-    <footer class="py-3 bg-dark fixed-bottom" style="margin-top: 500px">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
-        </div>
-        <!-- /.container -->
-    </footer>
+            <%}
+
+                //System.out.println("</table>");  
+                //System.out.println("</html></body>");  
+                con.close();
+            %>
+            </tbody>            
+        </table>
+
+
+</body>
+<footer class="py-3 bg-dark fixed-bottom" style="margin-top: 500px">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Team3@exavalu</p>
+    </div>
+    <!-- /.container -->
+</footer>
 
 </html>

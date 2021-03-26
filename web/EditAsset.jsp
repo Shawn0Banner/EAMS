@@ -362,7 +362,7 @@
                         </div>
                         <br>   
                         <br>
-                        <input type="submit" value="Add" class="btn btn-dark">
+                        <input type="submit" value="Submit" class="btn btn-dark">
                     </form>
                 </div>
                 <div class="register-show">
@@ -384,7 +384,7 @@
                         </div>
                         <br>
                         <br>
-                        <input type="submit" value="Remove" class="btn btn-dark">
+                        <input type="submit" value="Submit" class="btn btn-dark">
 
                     </form>
 

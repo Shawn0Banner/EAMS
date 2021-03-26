@@ -83,6 +83,7 @@ public class AllocateAsset extends HttpServlet {
 
                     if (rs2.next()) {
                         System.out.println("USER ALREADY HAS A " + rs2.getString("type"));
+                        out.println("<script>alert('User already has selected assets'); window.location.href='AdminHome.jsp';</script>");                      
                     } else {
                         //checking if there are assets of the cheked type not allocated to any user other than the admin
                         //selecting only the assets which are allocated to admin and department is equal to the user type
@@ -90,7 +91,6 @@ public class AllocateAsset extends HttpServlet {
 
                         ps.setString(1, type);
                         ps.setString(2, userDepartment);
-
                         ResultSet rs3 = ps.executeQuery();
 
                         if (rs3.next()) {

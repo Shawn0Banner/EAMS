@@ -255,6 +255,15 @@
         </script>
 
 
+        <script type="text/javascript">
+            window.history.forward();
+            function noBack()
+            {
+                window.history.forward();
+            }
+        </script>
+
+
     </head>
 
     <%
@@ -264,8 +273,7 @@
 
     %>
 
-    <body onload="myFunc();
-            myFunc2();">
+    <body onload="myFunc();myFunc2(); noBack();">
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top" id="mainNav">
             <div class="container">
@@ -328,7 +336,7 @@
                     <form id="deAllocateForm" method="post" onsubmit="return checkDeAllocateForm(this)">
                         <input type="text" name="userEmail" class="form-control" placeholder="Enter User Email" value="" />
                         <p id="container2" class="form-control">
-                            
+
                         </p>
                         <br>
                         <input type="submit" value="Submit" class="btn btn-dark">
