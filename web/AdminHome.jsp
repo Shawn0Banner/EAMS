@@ -6,7 +6,15 @@
 <html lang="en">
 
     <head>
+<script type="text/javascript">
+            window.history.forward();
+            function noBack()
+            {
+                window.history.forward();
+            }
+        </script>
 
+    <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -153,11 +161,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" style="color: white">User ID: <c:out value="${user.getUserId()}"></c:out></a>
-                            </li>
+                       
                             <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" style="color: white">User Name: <c:out value="${user.getUserName()}"></c:out></a>
+                                <a class="nav-link js-scroll-trigger" style="color: white">Welcome <c:out value="${user.getUserName()}"></c:out></a>
                         </li>
                         <li class ="nav-item">
                             <a class="nav-link js-scroll-trigger" href="Logout" style="color: white">Logout</a>
@@ -169,7 +175,7 @@
 
         <br>
         <br>
-        <br>
+       
         <div class="container login-container">
             <div class="row">
                 <div class="col-md-6 login-form-1 rounded-circle">
@@ -197,7 +203,7 @@
                     <div class="login-logo description">
                         <a href="TrackAsset.jsp"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
                     </div>
-                    <h3>Track</h3>                    
+                    <h3>Track Asset</h3>                    
                 </div>
             </div>
         </div>

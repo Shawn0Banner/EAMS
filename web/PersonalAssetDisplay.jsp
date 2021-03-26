@@ -31,6 +31,16 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
+    
+    <script type="text/javascript">
+            window.history.forward();
+            function noBack()
+            {
+                window.history.forward();
+            }
+        </script>
+
+    <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 
     <script>
         function myFunction() {

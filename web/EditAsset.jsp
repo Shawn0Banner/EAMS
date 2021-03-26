@@ -2,6 +2,15 @@
 <html lang="en">
 
     <head>
+        <script type="text/javascript">
+            window.history.forward();
+            function noBack()
+            {
+                window.history.forward();
+            }
+        </script>
+
+    <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
