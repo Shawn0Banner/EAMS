@@ -304,6 +304,13 @@
                 </div>
             </div>
         </nav>
+        
+        <%
+//get parameters from the request
+String email = request.getParameter("email");
+
+
+%>
         <div class="login-reg-panel">
             <div class="login-info-box">
                 <h2>Want to allocate asset?</h2>
@@ -323,7 +330,7 @@
                 <div class="login-show">
                     <h2>ALLOCATE ASSET </h2>
                     <form method="post" onsubmit="return checkAllocateForm(this)">
-                        <input type="text" name="userEmail" class="form-control" placeholder="Enter User Email" value="" />
+                        <input type="text" name="userEmail" class="form-control" placeholder="Enter User Email" value="<%=email%>" readonly="readonly"/>
                         <p id="container1" class="form-control">
                             <!-- new check boxes-->
                         </p>
@@ -334,7 +341,7 @@
                 <div class="register-show">
                     <h2>DE-ALLOCATE ASSET</h2>
                     <form id="deAllocateForm" method="post" onsubmit="return checkDeAllocateForm(this)">
-                        <input type="text" name="userEmail" class="form-control" placeholder="Enter User Email" value="" />
+                        <input type="text" name="userEmail" class="form-control" placeholder="Enter User Email" value="<%=email%>" readonly="readonly"/>
                         <p id="container2" class="form-control">
 
                         </p>

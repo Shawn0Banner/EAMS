@@ -42,7 +42,7 @@ public class FetchData extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         Connection conn = null;
-        
+        String email = request.getParameter("email");
         ArrayList<String> typeList = new ArrayList<String>();
         
         try (PrintWriter out = response.getWriter()) {
@@ -57,7 +57,7 @@ public class FetchData extends HttpServlet {
                 System.out.println(type);
                 typeList.add(type);
             }
-            
+            request.setAttribute("email", email);
             request.setAttribute("typeList", typeList);
             RequestDispatcher rd = request.getRequestDispatcher("AllocateAsset.jsp");
             rd.forward(request, response);

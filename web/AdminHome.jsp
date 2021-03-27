@@ -180,10 +180,10 @@
             <div class="row">
                 <div class="col-md-6 login-form-1 rounded-circle">
                     <div class="photog" >
-                        <a href="FetchData"> <img class="rounded" src="https://www.forescout.com/wp-content/uploads/2019/06/asset-mgmt-post-1-image.jpg" height="150" width="155" alt="" style="margin-top: 70px; margin-left: 45px"/> </a>
+                        <a href="Users.jsp"> <img class="rounded" src="https://www.forescout.com/wp-content/uploads/2019/06/asset-mgmt-post-1-image.jpg" height="150" width="155" alt="" style="margin-top: 70px; margin-left: 45px"/> </a>
                     </div>
                     <div class="login-logo description">
-                        <a href="FetchData"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
+                        <a href="Users.jsp"><img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/></a>
                     </div>
                     <h3>Allocate Asset</h3>
                 </div>

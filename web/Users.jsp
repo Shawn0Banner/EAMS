@@ -181,7 +181,7 @@
                     <td><%= rs.getString("userName")%></td>
                     <td><%= rs.getString("email")%></td>
                     <td><%= rs.getString("department")%></td>
-                    <td><button type="button" class="btn btn-secondary" onclick="window.location.href = 'FetchData'">Allocate/Deallocate</button></td>
+                    <td><button type="button" class="btn btn-secondary" onclick="window.location.href = 'FetchData?email=<%= rs.getString("email")%>'">Allocate/Deallocate</button></td>
                     <td><button type="button" class="btn btn-secondary" onclick="myFunc();">Remove</button></td>
                 </tr>
 
